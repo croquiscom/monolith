@@ -16,7 +16,7 @@ describe("compressImage", () => {
       .mockReturnValue("blob:http://localhost:3000/1234");
   });
 
-  it("파일을 압축하고 파일 객체를 리턴한다", async () => {
+  it("파일을 압축하고 파일 객체를 리턴합니다", async () => {
     const mockBlob = new Blob(["mock content"], { type: "image/jpeg" });
     const mockFile = new File([mockBlob], "image.jpg", { type: "image/jpeg" });
 
@@ -31,7 +31,7 @@ describe("compressImage", () => {
     expect(compressedFile.type).toBe("image/jpeg");
   });
 
-  it("파일 사이즈를 줄인다", async () => {
+  it("파일 사이즈를 줄입니다", async () => {
     const originalBlob = new Blob(["original big size content"], {
       type: "image/jpeg",
     });
