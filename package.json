@@ -15,7 +15,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:docs": "typedoc",
-    "lint": "eslint .",
+    "lint": "eslint ./src --ext .ts,.tsx",
     "preview": "vite preview",
     "docs": "http-server -o ./docs/index.html",
     "docs:generate": "typedoc",

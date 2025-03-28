@@ -101,7 +101,7 @@ export const useCountDownTimer = ({ end_at, enable = true, throttle_time = 10 }:
         return;
       }
     },
-    [end_at],
+    [end_at, throttle_time],
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -129,7 +129,9 @@ export const useCountDownTimer = ({ end_at, enable = true, throttle_time = 10 }:
     };
 
     return () => {
-      frame_ref.current && cancelAnimationFrame(frame_ref.current);
+      if (frame_ref.current) {
+        cancelAnimationFrame(frame_ref.current);
+      }
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [end_at, enable, updateTime]);
