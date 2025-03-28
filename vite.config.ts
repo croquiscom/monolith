@@ -14,6 +14,7 @@ const vitestConfig: ViteUserConfig = {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/monolith/',
   plugins: [react(),dts({
     insertTypesEntry: true,
   })],

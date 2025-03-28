@@ -6,12 +6,17 @@ on:
 
 jobs:
   pr:
-    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-      - uses: croquiscom/send-pr-to-slack/actions@main
-        with:
-          slack_user_name: 'Monolith_코드리뷰_요청'
-          slack_channel: 'github_frontend'
-          slack_emoji: ':zig-zag'
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: send pr to slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: "github_frontend"
+          SLACK_USERNAME: "Monolith_코드리뷰_요청"
+          SLACK_ICON_EMOJI: ":zig-zag"
+          SLACK_COLOR: "good"
+          SLACK_TITLE: "${{ github.event.pull_request.title }}"
+          SLACK_MESSAGE: "리뷰 부탁드립니다. 🙏"
+          SLACK_FOOTER: ""
+          MSG_MINIMAL: "true"
