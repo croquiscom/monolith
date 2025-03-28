@@ -1,5 +1,11 @@
 # monolith
 
+## 0.0.6
+
+### Patch Changes
+
+- 622020d: add docusaurus s3 deploy yml
+
 ## 0.0.5
 
 ### Patch Changes
