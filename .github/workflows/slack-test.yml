@@ -1,0 +1,26 @@
+name: slack-test
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  
+      pull-requests: write 
+    steps:
+      - name: send slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: '머니부문_fe'
+          SLACK_USERNAME: 'monolith'
+          SLACK_ICON_EMOJI: ':kakaostyle:'
+          SLACK_COLOR: 'good'
+          SLACK_TITLE: 'monolith 패키지가 업데이트 되었어요.'
+          SLACK_MESSAGE: "배포 내용 확인하기: <https://github.com/croquiscom/monolith/blob/main/CHANGELOG.md|링크>"
+          SLACK_FOOTER: ''
+          MSG_MINIMAL: 'true'
