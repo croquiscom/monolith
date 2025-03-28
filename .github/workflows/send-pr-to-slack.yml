@@ -1,0 +1,17 @@
+name: PR 요청 Slack 전송
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  pr:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: croquiscom/send-pr-to-slack/actions@main
+        with:
+          slack_user_name: 'Monolith_코드리뷰_요청'
+          slack_channel: 'github_frontend'
+          slack_emoji: ':zig-zag'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
