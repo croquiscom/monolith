@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Monolith',
   tagline: 'kakakostyle frontend common utility library',
-  favicon: 'https://cf.res.s.zigzag.kr/favicons/zigzag/favicon.ico',
+  favicon: 'https://kakaostyle.com/_next/static/images/favicon-b20ad83423dad48e2ab0c4321f7e991d.ico',
   url: 'https://croquiscom.github.io',  
   baseUrl: '/monolith/', 
   trailingSlash: false, 
@@ -75,12 +75,12 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'https://cf.fe.s.zigzag.kr/common/logo/zigzag_text_logo.png',
+    image: 'https://cf.image-farm.s.zigzag.kr/original/cms/2025/03/28/202503280837182070_027536.png',
     navbar: {
       title: 'Monolith',
       logo: {
         alt: 'kakaostyle Site Logo',
-        src: 'https://cf.fe.s.zigzag.kr/common/logo/zigzag_text_logo.png',
+        src: 'https://cf.image-farm.s.zigzag.kr/original/cms/2025/03/28/202503280837182070_027536.png',
       },
       items: [
         {

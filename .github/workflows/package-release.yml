@@ -51,16 +51,32 @@ jobs:
           NPM_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_NPM }}
           NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_NPM }}
 
-      # - name: send slack
-      #   if: steps.changesets.outputs.published == 'true'  
-      #   uses: rtCamp/action-slack-notify@v2
-      #   env:
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     SLACK_CHANNEL: 'github_frontend'
-      #     SLACK_USERNAME: 'monolith'
-      #     SLACK_ICON_EMOJI: ':kakaostyle'
-      #     SLACK_COLOR: 'good'
-      #     SLACK_TITLE: 'monolith 패키지가 업데이트 되었어요.'
-      #     SLACK_MESSAGE: "배포 내용 확인하기: <https://github.com/croquiscom/monolith/blob/main/CHANGELOG.md|링크>"
-      #     SLACK_FOOTER: ''
-      #     MSG_MINIMAL: 'true'
+            
+      - name: build docuasurus
+        if: steps.changesets.outputs.published == 'true'  
+        run: pnpm docs:build 
+        
+      - name: Deploy to GitHub Pages
+        if: steps.changesets.outputs.published == 'true'  
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build 
+
+      - name: Wait for 2 minutes (wait for docs deploy time)
+        if: steps.changesets.outputs.published == 'true'  
+        run: sleep 120
+
+      - name: send slack
+        if: steps.changesets.outputs.published == 'true'  
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: 'github_frontend'
+          SLACK_USERNAME: 'monolith 패키지 배포'
+          SLACK_ICON_EMOJI: ':kakaostyle'
+          SLACK_COLOR: 'good'
+          SLACK_TITLE: 'monolith 패키지가 새롭게 업데이트 되었어요. 🙏'
+          SLACK_MESSAGE: "배포 내용 확인하기: <https://github.com/croquiscom/monolith/blob/main/CHANGELOG.md|변경_내역> <https://croquiscom.github.io/monolith|공식_문서>"
+          SLACK_FOOTER: ''
+          MSG_MINIMAL: 'true'

@@ -16,7 +16,6 @@ jobs:
           SLACK_USERNAME: "Monolith_코드리뷰_요청"
           SLACK_ICON: ":kakaostyle"
           SLACK_COLOR: "good"
-          SLACK_TITLE: "${{ github.event.pull_request.title }}"
-          SLACK_MESSAGE: "리뷰 부탁드립니다. 🙏"
+          SLACK_MESSAGE: "리뷰 한번만 부탁드립니다. 🙏\n<${{ github.event.pull_request.html_url }}|PR 확인하기>"
           SLACK_FOOTER: ""
           MSG_MINIMAL: "true"
