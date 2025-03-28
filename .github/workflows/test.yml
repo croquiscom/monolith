@@ -1,18 +1,15 @@
-name: docusaurus-release
+name: 타입 및 린트 테스트
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  release:
-    name: Release
+  test-client:
+    name: prepare
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  
-      pull-requests: write 
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -24,10 +21,9 @@ jobs:
         with:
           node-version: 20
 
-
       - name: Install pnpm
         run: npm install -g pnpm
-  
+
       - uses: actions/cache@v4
         id: cache
         with:
@@ -41,17 +37,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: build docuasurus
-        run: pnpm docs:build 
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Deploy to S3
+      - name: Check type 
         run: |
-          aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET }} --delete --exact-timestamps
+          pnpm test:type
+
+      - name: Check eslint 
+        run: |
+          pnpm lint
+
+      - name: Check test 
+        run: |
+          pnpm test
