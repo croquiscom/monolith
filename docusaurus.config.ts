@@ -8,7 +8,7 @@ const config: Config = {
   tagline: 'kakakostyle frontend common utility library',
   favicon: 'https://cf.res.s.zigzag.kr/favicons/zigzag/favicon.ico',
   url: 'https://kakaostyle.com',
-  baseUrl: '/',
+  baseUrl: 'https://croquiscom.github.io/monolith',
   organizationName: 'kakaostyle',
   projectName: 'monoluth',
   onBrokenLinks: 'warn',
