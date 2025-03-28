@@ -114,56 +114,7 @@ export const HomePage: FC = () => {
 }
 ```
 
-## 4. 컴포넌트 스타일링(권장) 
-> 전사 프로젝트 대상이기 때문에 특정 서비스에 묶이는 스타일컴포넌트는 작성해선 안됩니다.
-
-1. css props 스타일의 경우는 유틸성 목적의 스타일용도로만 사용하고 메인 스타일링은 `styled components`를 사용합니다.
-
-- style object 를 활용한 inline styling 을 사용하는 것을 지양합니다.
-- cssProps 와 styledComponent 를 동시에 사용하지 않는것을 권장합니다.
-
-```ts
-// x
-const Func = () => {
-  return
-	 <div css={css`
-		// 해당 컴포넌트의 모든 style 처리 한 경우
-		//`}>
-		{...}
-	</div>
-}
-
-
-// o
-const Func = () => {
-  return
-	 <StyledComp css={mb(10)}>
-		{...}
-	</StyledComp>
-}
-
-export const mb = (value: number) => css`
-  margin-bottom: ${value}px;
-`
-
-const StyledComp = styled`
- ...
-`;
-```
-
-2. 하나의 컴포넌트 파일에 다수의 styledComponent 가 존재하는 경우 컴포넌트 하단에 변수 이름을 SC(Styled Components)로 만들고 object 타입 변수를 선언하여 구성합니다.
-
-- 스타일 컴포넌트를 사용할 때는 SC 객체 내의 컴포넌트를 사용하여 스타일링된 요소임을 명확히 합니다.
-
-```ts
-export const MyComponent = () => {
-  return <SC.Container>{/* 추가적인 컴포넌트 내용 */}</SC.Container>;
-};
-
-// 스타일 컴포넌트 객체 SC 정의
-const SC = {
-  Container: styled.div`
-    /* 스타일 정의 */
-  `,
-};
-```
+## 4. 컴포넌트 스타일링(필수)
+`monolith` 에서 컴포넌트 스타일링이 필요한 경우 `emotion`, `styled-components` 와 같은 별도의 스타일 컴포넌트의 사용을 하지않고 
+inline style 로 주입 혹은 표준스펙인 `css` 를 통해서만 처리합니다.
+ 

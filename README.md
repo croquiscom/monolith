@@ -10,9 +10,9 @@
 ## 가이드 리스트
 개발 기여, 세팅 등에 필요한 정보는 아래 각 가이드를 참고후 작업하시면 됩니다.
 * [컨벤션_가이드](./docusaurus/convention.md)
-* [개발_세팅_가이드](./docusaurus/developer.md)
-* [개발가요_가이드](./docusaurus/setting.md)
- 
+* [개발_세팅_가이드](./docusaurus/setting.md)
+* [작업_가이드](./docusaurus/developer.md)
+
 ## 패키지 변경사항 
 패키지별 업데이트 히스토리는 아래 문건 참고 부탁드립니다.
 

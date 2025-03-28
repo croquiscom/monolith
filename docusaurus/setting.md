@@ -26,6 +26,7 @@ $ npm install -g pnpm@9.14.2
 or corepack 사용시
 
 ```
+## corepack이 지원중단예정이라 최대한 피해주세요.
 $ corepack enable
 ```
 
