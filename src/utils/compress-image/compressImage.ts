@@ -1,5 +1,5 @@
 //utils/compressImage.ts
-import loadImage, { LoadImageOptions } from "blueimp-load-image";
+import loadImage from "blueimp-load-image";
 
 /**
  * 파일을 압축합니다.
@@ -10,12 +10,12 @@ import loadImage, { LoadImageOptions } from "blueimp-load-image";
  * console.log(compressedFile); // File { name: "image.jpg", type: "image/jpeg", size: 1234, ... }
  * ```
  * @param file - 압축할 파일
- * @param options - 압축 옵션
+ * @param maxWidth - 압축할 최대 너비 (기본값: 375)
  * @returns 압축된 파일
  */
 export async function compressImage(
   file: File,
-  { maxWidth = 375, canvas = true, meta = true, ...rest }: LoadImageOptions = {}
+  maxWidth?: number
 ): Promise<File> {
   return new Promise<File>((resolve, reject) => {
     try {
@@ -35,11 +35,7 @@ export async function compressImage(
           }
         },
         {
-          ...rest,
-          maxWidth,
-          canvas,
-          meta,
-          orientation: true,
+          maxWidth: maxWidth ?? 375,
         }
       );
     } catch (e) {
