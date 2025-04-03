@@ -24,6 +24,15 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     target: "esnext",
+    rollupOptions: {
+      external: ["react", "react-dom"], 
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM"
+        }
+      }
+    },
   },
   ...vitestConfig,
 })
