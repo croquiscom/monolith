@@ -1,5 +1,11 @@
 # monolith
 
+## 0.0.7
+
+### Patch Changes
+
+- bcfc15b: 패키지 링크 수정 처리
+
 ## 0.0.6
 
 ### Patch Changes
