@@ -30,6 +30,7 @@ description: 프로젝트를 구성하는 컨벤션 가이드를 제공합니다
 ```
 
 ### 이벤트핸들러 네이밍 가이드(권장)
+
 - 컴포넌트 내부에서 사용하는 이벤트 핸들링 함수는 `handleXXXClick` 의 형식으로 작성합니다.
 - props 로 전달받는 핸들링 함수는 `onXXXClick` 형식으로 작성합니다.
 
@@ -50,8 +51,6 @@ const Comp: FC<Props> ({ onSubmitButtonClick }) => {
   )
 }
 ```
-
-
 
 ### 예외케이스
 
@@ -115,6 +114,6 @@ export const HomePage: FC = () => {
 ```
 
 ## 4. 컴포넌트 스타일링(필수)
-`monolith` 에서 컴포넌트 스타일링이 필요한 경우 `emotion`, `styled-components` 와 같은 별도의 스타일 컴포넌트의 사용을 하지않고 
+
+`monolith` 에서 컴포넌트 스타일링이 필요한 경우 `emotion`, `styled-components` 와 같은 별도의 스타일 컴포넌트의 사용을 하지않고
 inline style 로 주입 혹은 표준스펙인 `css` 를 통해서만 처리합니다.
- 

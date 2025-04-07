@@ -2,7 +2,7 @@
  * 주어진 길이의 배열을 생성 합니다
  * dummy 리스트를 만들거나 index가 필요한 배열 생성 필요시 사용합니다.
  * @param array_count - 생성할 배열 갯수
- * 
+ *
  * @example
  * ```typescript
  * const array = createArray(5);
@@ -11,4 +11,4 @@
  */
 export function createArray(array_count: number) {
   return Array.from({ length: array_count }, (_, index) => index);
-};
+}

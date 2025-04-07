@@ -5,7 +5,7 @@ describe('useIsomorphicLayoutEffect', () => {
   it('브라우저 환경에서 실행시 useLayoutEffect가 실행됩니다.', () => {
     vi.stubGlobal('window', {}); // 브라우저 환경 모킹
 
-    const effect_callback = vi.fn(); 
+    const effect_callback = vi.fn();
 
     renderHook(() => useIsomorphicLayoutEffect(effect_callback));
 
@@ -13,5 +13,4 @@ describe('useIsomorphicLayoutEffect', () => {
 
     vi.unstubAllGlobals(); // 모킹 해제
   });
-
 });

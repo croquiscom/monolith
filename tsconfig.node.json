@@ -12,7 +12,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": false,
-    "declaration":true,
+    "declaration": true,
     "declarationDir": "dist",
     "emitDeclarationOnly": true,
 

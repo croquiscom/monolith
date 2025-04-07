@@ -15,4 +15,4 @@
 
 export function isIos(user_agent: string = navigator.userAgent) {
   return Boolean(user_agent && /iPhone|iPad|iPod|\bOS X\b/gi.test(user_agent));
-};
+}

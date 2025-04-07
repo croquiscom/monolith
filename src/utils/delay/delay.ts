@@ -13,10 +13,10 @@
  */
 export function delay(ms: number) {
   return new Promise<void>((resolve) => {
-    if (ms ===0) {
+    if (ms === 0) {
       resolve();
     } else {
-      setTimeout(resolve, ms)
+      setTimeout(resolve, ms);
     }
-  })
-};
+  });
+}

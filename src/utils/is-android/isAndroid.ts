@@ -15,4 +15,4 @@
 
 export function isAndroid(user_agent: string = navigator.userAgent) {
   return Boolean(user_agent && /(android)/i.test(user_agent));
-};
+}
