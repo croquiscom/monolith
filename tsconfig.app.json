@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
-    "declaration":true,
+    "declaration": true,
     "sourceMap": true,
     "noEmit": false,
     "emitDeclarationOnly": true,
@@ -26,9 +26,9 @@
     "types": ["vitest/globals"]
   },
   "include": ["src/**/*"],
-  "typedocOptions": {               
+  "typedocOptions": {
     "entryPoints": ["src/index.ts"],
     "out": "docs"
   },
-  "extends": "@docusaurus/tsconfig",
+  "extends": "@docusaurus/tsconfig"
 }

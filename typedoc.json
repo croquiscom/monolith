@@ -3,7 +3,7 @@
   "out": "./docs",
   "entryPoints": ["src/index.ts"],
   // "plugin": ["typedoc-plugin-markdown"],
-  "readme": "none",
+  "readme": "none"
   // "plugin": ["typedoc-material-theme"],
   // "themeColor": "#cb9820",
 }
