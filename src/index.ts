@@ -13,3 +13,4 @@ export { createArray } from './utils/create-array/createArray';
 export { delay } from './utils/delay/delay';
 export { isIos } from './utils/is-ios/isIos';
 export { isAndroid } from './utils/is-android/isAndroid';
+export { compressImage } from './utils/compress-image/compressImage';
