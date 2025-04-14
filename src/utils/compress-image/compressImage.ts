@@ -22,7 +22,7 @@ import loadImage from 'blueimp-load-image';
  *
  *     // 압축된 파일을 업로드
  *     const form_data = new FormData();
- *     formData.append("image", compressed_file);
+ *     form_data.append("image", compressed_file);
  *     await fetch("/presigned-url", {
  *       method: "PUT",
  *       body: form_data,
