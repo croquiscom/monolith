@@ -17,15 +17,15 @@ import loadImage from 'blueimp-load-image';
  *     console.log("Original File:", file);
  *
  *     // 이미지 압축
- *     const compressedFile = await compressImage(file, 500);
- *     console.log("Compressed File:", compressedFile);
+ *     const compressed_file = await compressImage(file, 500);
+ *     console.log("Compressed File:", compressed_file);
  *
  *     // 압축된 파일을 업로드
- *     const formData = new FormData();
- *     formData.append("image", compressedFile);
+ *     const form_data = new FormData();
+ *     formData.append("image", compressed_file);
  *     await fetch("/presigned-url", {
  *       method: "PUT",
- *       body: formData,
+ *       body: form_data,
  *     });
  *   }
  * }
