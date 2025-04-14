@@ -15,12 +15,10 @@ describe('compressImage', () => {
   const validImageFile = new File([originalBlob], 'image.jpg', { type: 'image/jpeg' });
 
   beforeAll(() => {
-    // Prevent potential errors in environments that use blob URLs
     global.URL.createObjectURL = vi.fn(() => 'blob:http://localhost:3000/mock');
   });
 
   beforeEach(() => {
-    // Clear previous mocks to ensure isolation
     vi.clearAllMocks();
   });
 
