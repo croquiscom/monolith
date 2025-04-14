@@ -54,11 +54,11 @@ export async function compressImage(file: File, max_width?: number): Promise<Fil
           if (canvas instanceof HTMLCanvasElement) {
             canvas.toBlob((blob) => {
               if (blob) {
-                const compressedFile = new File([blob], file.name, {
+                const compressed_file = new File([blob], file.name, {
                   type: file.type,
                   lastModified: Date.now(),
                 });
-                resolve(compressedFile);
+                resolve(compressed_file);
               }
             });
           }
