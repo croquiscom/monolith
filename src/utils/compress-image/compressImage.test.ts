@@ -55,6 +55,11 @@ describe('compressImage', () => {
     expect(large_file.size).toBeGreaterThan(small_file.size);
   });
 
+  it('이미지 파일이 아니면 에러를 던집니다', async () => {
+    const non_image_file = new File(['text content'], 'document.txt', { type: 'text/plain' });
+    await expect(compressImage(non_image_file)).rejects.toThrow('이미지 파일이 아닙니다.');
+  });
+
   it('파일이 undefined이면 에러를 던집니다', async () => {
     // @ts-expect-error: 의도적으로 undefined를 전달
     await expect(compressImage(undefined)).rejects.toThrow('파일이 제공되지 않았습니다.');

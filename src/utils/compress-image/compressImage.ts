@@ -46,6 +46,10 @@ export async function compressImage(file: File, max_width?: number): Promise<Fil
     throw new Error('유효한 File 객체가 아닙니다.');
   }
 
+  if (!file.type.startsWith('image/')) {
+    throw new Error('이미지 파일이 아닙니다.');
+  }
+
   return new Promise<File>((resolve, reject) => {
     try {
       loadImage(
