@@ -1,5 +1,11 @@
 # monolith
 
+## 0.1.0
+
+### Minor Changes
+
+- 5a58029: compressImage 유틸함수 생성
+
 ## 0.0.7
 
 ### Patch Changes
