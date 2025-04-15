@@ -69,6 +69,7 @@ export async function compressImage(file: File, max_width?: number): Promise<Fil
         },
         {
           maxWidth: max_width ?? 375,
+          canvas: true,
         },
       );
     } catch (e) {
