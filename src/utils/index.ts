@@ -6,3 +6,4 @@ export { delay } from './delay/delay';
 export { isIos } from './is-ios/isIos';
 export { isAndroid } from './is-android/isAndroid';
 export { compressImage } from './compress-image/compressImage';
+export { debounce } from './debounce/debounce';
