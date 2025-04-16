@@ -1,5 +1,11 @@
 # monolith
 
+## 0.1.2
+
+### Patch Changes
+
+- 7043a00: useCountdownTimer 훅에서 카운트다운 종료 여부 필드 추가
+
 ## 0.1.1
 
 ### Patch Changes
