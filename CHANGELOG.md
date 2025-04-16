@@ -1,5 +1,11 @@
 # monolith
 
+## 0.1.1
+
+### Patch Changes
+
+- 549b0dd: compressImage canvas option이 없어서 리사이징이 안되는 문제 수정
+
 ## 0.1.0
 
 ### Minor Changes
