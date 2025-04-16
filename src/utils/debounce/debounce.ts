@@ -20,6 +20,37 @@ interface Config<T extends AnyFunc> {
  * @param invoke_edge {"leading" | "trailing"} - [invoke_edge="trailing"] 함수 호출 시점.
  * leading 일 경우 지연 시작 지점에 함수를 호출 합니다.
  * trailing 일 경우
+ *
+ * @example invoke_edge 가 trailing 일 때
+ * ``` typescript
+ *   // invoke_edge 가 "trailing" 일 경우...(기본값)
+ *   const debounced_func_trailing = debounce({
+ *     func: () => {
+ *       console.log("invoked")
+ *     },
+ *     wait: 300,
+ *   })
+ *
+ *   // 마지막 호출로 부터 300ms 후... "invoked" 1 회 출력
+ *   debounced_func_trailing()
+ *   debounced_func_trailing()
+ * ```
+ *
+ * @example invoke_edge 가 "leading" 일 때
+ * ``` typescript
+ *   // invoke_edge 가 "leading" 일 경우...
+ *   const debounced_func_leading = debounce({
+ *     func: () => {
+ *       console.log("invoked")
+ *     },
+ *     wait: 300,
+ *     invoke_edge: "leading"
+ *   })
+ *
+ *   // 즉시 "invoked" 1회 출력 후 마지막 호출로 부터 300ms 가 지나기 전까지 함수 호출 차단
+ *   debounced_func_leading()
+ *   debounced_func_leading()
+ * ```
  */
 export const debounce = <T extends AnyFunc>({
   func,
