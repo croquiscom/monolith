@@ -34,6 +34,7 @@ describe('useCountdownTimer', () => {
       minutes: 4,
       seconds: 59,
       milliseconds: 0,
+      is_finished: false,
     });
   });
 
@@ -49,6 +50,7 @@ describe('useCountdownTimer', () => {
       minutes: 0,
       seconds: 0,
       milliseconds: 0,
+      is_finished: true,
     });
   });
 
@@ -63,6 +65,7 @@ describe('useCountdownTimer', () => {
       minutes: 0,
       seconds: 0,
       milliseconds: 0,
+      is_finished: false,
     });
 
     act(() => {
@@ -75,6 +78,7 @@ describe('useCountdownTimer', () => {
       minutes: 0,
       seconds: 0,
       milliseconds: 0,
+      is_finished: false,
     });
   });
 
@@ -96,5 +100,20 @@ describe('useCountdownTimer', () => {
     });
 
     expect(result.current.seconds).toBe(9);
+  });
+
+  it('타이머가 정상적으로 종료된 이후 is_finished 에서는 true를 응답합니다.', () => {
+    const end_at = Date.now() + 10 * 1_000; // 10초 후
+
+    const { result } = renderHook(() => useCountDownTimer({ end_at, enable: true }));
+
+    expect(result.current.is_finished).toBe(false);
+
+    act(() => {
+      vi.advanceTimersByTime(10_000);
+    });
+
+    expect(result.current.is_finished).toBe(true);
+
   });
 });

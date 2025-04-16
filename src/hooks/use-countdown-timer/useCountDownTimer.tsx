@@ -59,6 +59,14 @@ interface CountdownProps {
  * ms 를 안쓰고 second 단위 까지만 사용이 필요한 경우
  *   // MEMO: 초단위 쓰로틀링 적용
  *   const { days, hours, minutes, seconds, milliseconds } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf(), throttle_time: 1_000 })
+ * 
+ *  타이머 종료되는 경우
+ *   const { is_finished } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf(), throttle_time: 1_000 })
+ * 
+ * 
+ *  enable이 false 경우 타이머 종료여부는 false로 고정됩니다.
+ *   const { is_finished } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf(), throttle_time: 1_000, enable: false })
+ *   console.log(is_finished) // false
  * ```
  */
 export const useCountDownTimer = ({ end_at, enable = true, throttle_time = 10 }: CountdownProps) => {
@@ -135,7 +143,12 @@ export const useCountDownTimer = ({ end_at, enable = true, throttle_time = 10 }:
     };
   }, [end_at, enable, updateTime]);
 
-  return time;
+  const is_finished = time.days === 0 && time.hours === 0 && time.minutes === 0 && time.seconds === 0 && time.milliseconds === 0 && enable;
+
+  return {
+    ...time,
+    is_finished,
+  };
 };
 
 const getCountdown = (from: number, to: number): CountdownType => {
