@@ -17,13 +17,13 @@ interface Config<T extends AnyFunc> {
  * "trailing" 일 경우, 가장 마지막 호출 시점으로부터 지연 시간이 모두 흐른 뒤에 함수가 호출 됩니다.
  * "leading" 일 경우 함수를 즉시 호출하고, 지연 시간동안 추가적인 호출을 차단합니다.
  *
- * 한편, 리턴된 함수는 memoized 되어 있습니다.
+ * 리턴된 함수는 memo 처리 되어 있습니다.
  *
- * @param func {Function} - 지연 효과를 적용할 함수
- * @param wait {number} - [wait=0] 지연 시간(ms 단위)
- * @param invoke_edge {"leading" | "trailing"} - [invoke_edge="trailing"] 함수 호출 시점.
- * leading 일 경우 지연 시작 지점에 함수를 호출 합니다.
- * trailing 일 경우
+ * @param config debounce 설정 객체
+ * @param config.func 지연 효과를 적용할 함수
+ * @param config.wait 지연 시간(ms 단위) [wait=0]
+ * @param config.invoke_edge 함수 호출 시점 [invoke_edge="trailing"]
+ * @return debounce 및 memo 처리된 함수
  *
  * @example invoke_edge 가 trailing 일 때
  * ``` jsx
