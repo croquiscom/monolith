@@ -1,5 +1,11 @@
 # monolith
 
+## 0.2.0
+
+### Minor Changes
+
+- 5b59c44: debounce 처리용 util 및 hook 추가
+
 ## 0.1.2
 
 ### Patch Changes
