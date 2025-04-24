@@ -15,7 +15,7 @@ export const usePreloadImage = (image_src_list: string[]) => {
   const [is_preload_completed, setIsPreloadCompleted] = useState(false);
 
   useEffect(() => {
-    let loadedCount = 0;
+    let loaded_count = 0;
 
     if (image_src_list.length === 0) {
       setIsPreloadCompleted(true);
@@ -23,8 +23,8 @@ export const usePreloadImage = (image_src_list: string[]) => {
     }
 
     const completeLoadImage = () => {
-      loadedCount++;
-      if (loadedCount === image_src_list.length) {
+      loaded_count++;
+      if (loaded_count === image_src_list.length) {
         setIsPreloadCompleted(true);
       }
     };

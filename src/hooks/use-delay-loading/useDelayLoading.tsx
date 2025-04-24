@@ -31,27 +31,26 @@ import { useEffect, useRef, useState } from 'react';
  */
 export function useDelayLoading(is_loading: boolean, delay: number = 200) {
   const [is_delayed_loading, setIsDelayedLoading] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timer_ref = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (is_loading) {
-      timerRef.current = setTimeout(() => {
-        setIsDelayedLoading(true);
-      }, delay);
-    } else {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-      setIsDelayedLoading(false);
+      timer_ref.current = setTimeout(() => setIsDelayedLoading(true), delay);
+      return () => {
+        if (timer_ref.current) {
+          clearTimeout(timer_ref.current);
+        }
+        
+        timer_ref.current = null;
+      };
+    }
+    
+    if (timer_ref.current) {
+      clearTimeout(timer_ref.current);
     }
 
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-    };
+    timer_ref.current = null;
+    setIsDelayedLoading(false);
   }, [is_loading, delay]);
 
   return is_delayed_loading;
