@@ -1,3 +1,4 @@
+
 // Components
 export { SwitchCase } from './components/switch-case/SwitchCase';
 
@@ -8,6 +9,7 @@ export { useCountDownTimer } from './hooks/use-countdown-timer/useCountDownTimer
 export { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect/useIsomorphicLayoutEffect';
 export { usePreloadImage } from './hooks/use-preload-image/usePreloadImage';
 export { useDebounce } from './hooks/use-debounce/useDebounce';
+export { useDelayLoading } from './hooks/use-delay-loading/useDelayLoading';
 
 // Utils
 export { createArray } from './utils/create-array/createArray';
