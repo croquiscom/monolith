@@ -1,5 +1,11 @@
 # monolith
 
+## 0.3.0
+
+### Minor Changes
+
+- 941aec5: useDelayLoading 훅 추가 및 usePreloadImage 훅 리턴 플래그 추가
+
 ## 0.2.0
 
 ### Minor Changes
