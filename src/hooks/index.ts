@@ -9,4 +9,4 @@ export { useIsMounted } from './use-is-mounted/useIsMounted';
 export { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect/useIsomorphicLayoutEffect';
 export { useMount } from './use-mount/useMount';
 export { usePreloadImage } from './use-preload-image/usePreloadImage';
-
+export { useThrottle } from './use-throttle/useThrottle';

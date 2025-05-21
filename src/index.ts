@@ -10,6 +10,7 @@ export { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect/
 export { usePreloadImage } from './hooks/use-preload-image/usePreloadImage';
 export { useDebounce } from './hooks/use-debounce/useDebounce';
 export { useDelayLoading } from './hooks/use-delay-loading/useDelayLoading';
+export { useThrottle } from './hooks/use-throttle/useThrottle';
 
 // Utils
 export { createArray } from './utils/create-array/createArray';
