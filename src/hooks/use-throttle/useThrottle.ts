@@ -16,20 +16,34 @@ interface Config<T extends AnyFunction> {
  * 주어진 콜백 함수를 지정된 시간 간격으로 제한하여 호출할 수 있도록 하는 훅입니다.
  * 주로 성능 최적화 및 불필요한 함수 호출을 방지하기 위해 사용됩니다.
  *
- * @param func - 호출할 함수
- * @param wait - 함수 호출을 제한할 시간 간격 (밀리초 단위)
- * @param options.leading - true일 경우, 최초 호출 시점에 함수를 호출합니다.
- * @param options.trailing - true일 경우, 마지막 호출 시점에 함수를 호출합니다.
- * @return - throttle 및 memo 처리된 함수
- *  
+ * @template T - 쓰로틀링될 함수의 타입입니다.
+ * @param {Config<T>} config - 쓰로틀 설정을 위한 객체입니다.
+ * @param {T} config.func - 쓰로틀링될 함수입니다.
+ * @param {number} config.wait - 밀리초 단위의 대기 시간입니다. 이 시간 동안 함수 호출 빈도가 제한됩니다.
+ * @param {object} [config.options={ leading: true, trailing: true }] - (선택적) lodash 쓰로틀 옵션입니다.
+ * @param {boolean} [config.options.leading=true] - `true`인 경우, 타임아웃의 leading edge에서 함수를 호출합니다.
+ * @param {boolean} [config.options.trailing=true] - `true`인 경우, 타임아웃의 trailing edge에서 함수를 호출합니다.
+ * @returns 원본 함수와 동일한 시그니처를 가지는 메모이제이션되고 쓰로틀링된 버전의 함수를 반환합니다.
+ *
  * @example
- * ```typescript
- * const callback = () => {
- *   console.log('callback function invoked');
- * };
- * const throttle = useThrottle(callback, 1000);
+ * ```tsx
+ * const throttle = useThrottle({
+ *  func: (x: number, y: number) => {
+ *    console.log(`마우스 위치: x=${x}, y=${y} (쓰로틀됨)`);
+ *  },
+ *  wait: 1000,
+ *  options: { leading: true, trailing: true }, // 시작과 끝 시점에서 함수를 호출합니다.
+ *  // options를 생략하면 기본값은 { leading: true, trailing: true }입니다.
+ *  // options: { leading: false, trailing: true }로 설정하면 끝 시점에서만 함수를 호출합니다.
+ *  // options: { leading: true, trailing: false }로 설정하면 시작 시점에서만 함수를 호출합니다.
+ *  // options: { leading: false, trailing: false }로 설정하면 함수를 호출하지 않습니다.
+ * });
  * 
- * throttle();
+ * const handleMouseMove = (e) => {
+ *  throttle(e.clientX, e.clientY); // 쓰로틀링된 함수 호출
+ * };
+ * 
+ * return <div onMouseMove={handleMouseMove}>Move your mouse</div>;
  * ```
  */
 export const useThrottle = <T extends AnyFunction>({
