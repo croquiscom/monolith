@@ -1,4 +1,3 @@
-
 // Components
 export { SwitchCase } from './components/switch-case/SwitchCase';
 
@@ -10,6 +9,7 @@ export { useIsomorphicLayoutEffect } from './hooks/use-isomorphic-layout-effect/
 export { usePreloadImage } from './hooks/use-preload-image/usePreloadImage';
 export { useDebounce } from './hooks/use-debounce/useDebounce';
 export { useDelayLoading } from './hooks/use-delay-loading/useDelayLoading';
+export { useThrottle } from './hooks/use-throttle/useThrottle';
 
 // Utils
 export { createArray } from './utils/create-array/createArray';
@@ -18,3 +18,4 @@ export { isIos } from './utils/is-ios/isIos';
 export { isAndroid } from './utils/is-android/isAndroid';
 export { compressImage } from './utils/compress-image/compressImage';
 export { debounce } from './utils/debounce/debounce';
+export { throttle } from './utils/throttle/throttle';
