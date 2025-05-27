@@ -23,7 +23,7 @@ describe('throttle', () => {
     const throttled_func = throttle({
       func,
       wait,
-      options: { leading: true, trailing: false }
+      options: { leading: true, trailing: false },
     });
 
     throttled_func();
@@ -34,13 +34,13 @@ describe('throttle', () => {
     const throttled_func = throttle({
       func,
       wait,
-      options: { leading: true, trailing: false }
+      options: { leading: true, trailing: false },
     });
 
     throttled_func();
     throttled_func();
     throttled_func();
-    
+
     expect(func).toHaveBeenCalledTimes(1);
   });
 
@@ -48,12 +48,12 @@ describe('throttle', () => {
     const throttled_func = throttle({
       func,
       wait,
-      options: { leading: false, trailing: true }
+      options: { leading: false, trailing: true },
     });
 
     throttled_func();
     throttled_func();
-    
+
     expect(func).not.toHaveBeenCalled();
 
     vi.advanceTimersByTime(wait);
@@ -64,13 +64,13 @@ describe('throttle', () => {
     const throttled_func = throttle({
       func,
       wait,
-      options: { leading: true, trailing: true }
+      options: { leading: true, trailing: true },
     });
 
     throttled_func();
     throttled_func();
     throttled_func();
-    
+
     expect(func).toHaveBeenCalledTimes(1); // leading 호출
 
     vi.advanceTimersByTime(wait);
@@ -96,7 +96,7 @@ describe('throttle', () => {
     const throttled_func = throttle({
       func,
       wait,
-      options: { leading: false, trailing: false }
+      options: { leading: false, trailing: false },
     });
 
     throttled_func();

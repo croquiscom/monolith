@@ -38,28 +38,25 @@ interface Config<T extends unknown[]> {
  *  // options: { leading: true, trailing: false }로 설정하면 시작 시점에서만 함수를 호출합니다.
  *  // options: { leading: false, trailing: false }로 설정하면 함수를 호출하지 않습니다.
  * });
- * 
+ *
  * const handleMouseMove = (e) => {
  *  throttle(e.clientX, e.clientY); // 쓰로틀링된 함수 호출
  * };
- * 
+ *
  * return <div onMouseMove={handleMouseMove}>Move your mouse</div>;
  * ```
  */
-export const useThrottle = <T extends unknown[]>({
-  func,
-  wait,
-  options,
-}: Config<T>): AnyFunc<T> => {
+export const useThrottle = <T extends unknown[]>({ func, wait, options }: Config<T>): AnyFunc<T> => {
   const func_ref = useRef<AnyFunc<T>>(func);
   func_ref.current = func;
 
   return useMemo(
-    () => throttle({
-      func: func_ref.current,
-      wait,
-      options,
-    }),
+    () =>
+      throttle({
+        func: func_ref.current,
+        wait,
+        options,
+      }),
     [wait, options],
   );
 };

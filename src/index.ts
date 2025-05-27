@@ -1,4 +1,3 @@
-
 // Components
 export { SwitchCase } from './components/switch-case/SwitchCase';
 

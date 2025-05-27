@@ -77,7 +77,7 @@ describe('useThrottle', () => {
 
     expect(func).toHaveBeenCalledTimes(2);
   });
-  
+
   it('leading과 trailing이 모두 false일 경우, 함수가 호출되지 않습니다.', () => {
     const { result } = renderHook(() =>
       useThrottle({
