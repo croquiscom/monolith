@@ -1,5 +1,12 @@
 # monolith
 
+## 0.4.0
+
+### Minor Changes
+
+- 19ad571: useThrottle hook 추가
+- 66ac934: isEqual 추가 및 lodash-es 제거
+
 ## 0.3.0
 
 ### Minor Changes
