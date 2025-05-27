@@ -14,6 +14,7 @@ export { useDelayLoading } from './hooks/use-delay-loading/useDelayLoading';
 // Utils
 export { createArray } from './utils/create-array/createArray';
 export { delay } from './utils/delay/delay';
+export { isEqual } from './utils/is-equal/isEqual';
 export { isIos } from './utils/is-ios/isIos';
 export { isAndroid } from './utils/is-android/isAndroid';
 export { compressImage } from './utils/compress-image/compressImage';

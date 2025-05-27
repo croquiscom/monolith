@@ -3,6 +3,7 @@
  */
 export { createArray } from './create-array/createArray';
 export { delay } from './delay/delay';
+export { isEqual } from './is-equal/isEqual';
 export { isIos } from './is-ios/isIos';
 export { isAndroid } from './is-android/isAndroid';
 export { compressImage } from './compress-image/compressImage';

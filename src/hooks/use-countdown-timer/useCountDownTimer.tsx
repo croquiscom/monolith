@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { useIsomorphicLayoutEffect } from '../use-isomorphic-layout-effect/useIsomorphicLayoutEffect';
-import { isEqual } from 'lodash-es';
+import { isEqual } from '../../utils/is-equal/isEqual';
 
 const SECOND = 1_000;
 /**
