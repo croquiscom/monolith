@@ -19,3 +19,4 @@ export { isIos } from './utils/is-ios/isIos';
 export { isAndroid } from './utils/is-android/isAndroid';
 export { compressImage } from './utils/compress-image/compressImage';
 export { debounce } from './utils/debounce/debounce';
+export { throttle } from './utils/throttle/throttle';

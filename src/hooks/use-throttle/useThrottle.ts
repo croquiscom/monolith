@@ -1,10 +1,10 @@
-import { throttle } from 'lodash-es';
 import { useMemo, useRef } from 'react';
+import { throttle } from '../../utils/throttle/throttle';
 
-type AnyFunction = (...args: never[]) => unknown;
+type AnyFunc<T extends unknown[]> = (...args: T) => unknown;
 
-interface Config<T extends AnyFunction> {
-  func: T;
+interface Config<T extends unknown[]> {
+  func: AnyFunc<T>;
   wait?: number;
   options?: {
     leading?: boolean;
@@ -16,7 +16,7 @@ interface Config<T extends AnyFunction> {
  * 주어진 콜백 함수를 지정된 시간 간격으로 제한하여 호출할 수 있도록 하는 훅입니다.
  * 주로 성능 최적화 및 불필요한 함수 호출을 방지하기 위해 사용됩니다.
  *
- * @template T - 쓰로틀링될 함수의 타입입니다.
+ * @template T - 쓰로틀링될 함수의 파라미터 타입입니다.
  * @param {Config<T>} config - 쓰로틀 설정을 위한 객체입니다.
  * @param {T} config.func - 쓰로틀링될 함수입니다.
  * @param {number} config.wait - 밀리초 단위의 대기 시간입니다. 이 시간 동안 함수 호출 빈도가 제한됩니다.
@@ -46,17 +46,20 @@ interface Config<T extends AnyFunction> {
  * return <div onMouseMove={handleMouseMove}>Move your mouse</div>;
  * ```
  */
-export const useThrottle = <T extends AnyFunction>({
+export const useThrottle = <T extends unknown[]>({
   func,
   wait,
-  options = { leading: true, trailing: true },
-}: Config<T>) => {
-  const func_ref = useRef<T>(func);
+  options,
+}: Config<T>): AnyFunc<T> => {
+  const func_ref = useRef<AnyFunc<T>>(func);
   func_ref.current = func;
-  const { leading, trailing } = options;
 
   return useMemo(
-    () => throttle((...args: Parameters<T>) => func_ref.current(...args) as ReturnType<T>, wait, { leading, trailing }),
-    [wait, leading, trailing],
+    () => throttle({
+      func: func_ref.current,
+      wait,
+      options,
+    }),
+    [wait, options],
   );
 };
