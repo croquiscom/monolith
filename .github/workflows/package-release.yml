@@ -39,12 +39,36 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check for package changes
+        id: package-changes
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "Changed files: $CHANGED_FILES"
+          
+          if echo "$CHANGED_FILES" | grep -q "^packages/utils/"; then
+            echo "utils_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "utils_changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+          if echo "$CHANGED_FILES" | grep -q "^packages/eslint-config/"; then
+            echo "eslint_config_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "eslint_config_changed=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm changeset version
-          publish: pnpm release:package
+          publish: |
+            if [ "${{ steps.package-changes.outputs.utils_changed }}" = "true" ]; then
+              pnpm --filter @croquiscom/utils release:package
+            fi
+            if [ "${{ steps.package-changes.outputs.eslint_config_changed }}" = "true" ]; then
+              pnpm --filter @croquiscom/eslint-config release:package
+            fi
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_GITHUB }}
           NPM_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_NPM }}
