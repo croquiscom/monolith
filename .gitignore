@@ -28,3 +28,12 @@ docs
 *.njsproj
 *.sln
 *.sw?
+
+# Turborepo
+.turbo
+
+# Build outputs
+coverage
+
+# TypeScript
+*.tsbuildinfo

@@ -1,0 +1,62 @@
+{
+  "name": "@croquiscom/monolith",
+  "description": "kakakostyle frontend common utility library",
+  "license": "MIT",
+  "version": "0.4.0",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.es.js",
+    "require": "./dist/index.cjs.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "test:type": "tsc --skipLibCheck",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": "^19 || ^18 || ^17",
+    "react-dom": "^19 || ^18 || ^17"
+  },
+  "dependencies": {
+    "blueimp-load-image": "^5.16.0",
+    "clsx": "^2.0.0"
+  },
+  "devDependencies": {
+    "@croquiscom/eslint-config": "workspace:*",
+    "@eslint/js": "^9.21.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/blueimp-load-image": "^5.16.6",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^22.13.9",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "jsdom": "^26.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.3",
+    "vitest": "^3.0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/croquiscom/monolith.git"
+  },
+  "author": "bmo.star <bmo.star@kakaostyle.com>",
+  "contributors": [
+    "bmo.star <bmo.star@kakaostyle.com> "
+  ]
+} 

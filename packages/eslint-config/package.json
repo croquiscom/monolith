@@ -1,0 +1,37 @@
+{
+  "name": "@croquiscom/eslint-config",
+  "version": "0.1.0",
+  "description": "Shared ESLint configuration for KakaoStyle projects",
+  "license": "MIT",
+  "main": "index.js",
+  "type": "module",
+  "files": [
+    "index.js",
+    "react.js",
+    "typescript.js"
+  ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.21.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript-eslint": "^8.24.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.21.0",
+    "typescript": "~5.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/croquiscom/monolith.git"
+  },
+  "author": "bmo.star <bmo.star@kakaostyle.com>"
+} 

@@ -1,24 +1,65 @@
-# 카카오스타일 FE 공통 패키지 - Monolith [BETA]
+# @croquiscom/monolith
 
-`Monolith` 패키지는 카카오스타일 FE 에서 공통으로 사용하는 `Hook`, `Component`, `Util`, `Constant` 를 제공하기 위한 패키지 입니다.
+KakaoStyle frontend common utility library monorepo
 
-## 작업시 주의사항
+## Packages
 
-`Monolith` 패키지의 목적은 모든 카카오스타일 FE 프로덕트에서 사용되는것을 목적으로 제공됩니다.
-때문에 전체가 아닌 한개의 프로젝트 혹은 일부 프로젝트에서 사용되는 `Hook`, `Component`, `Util`, `Constant` 의 추가는 금지됩니다.
+This monorepo contains the following packages:
 
-예외적으로 많은 프로젝트에서 사용하는 경우 `FE챕터 구성원`들과 논의후 추가는 가능합니다.
+### [@croquiscom/monolith](./packages/utils)
+React.js 관련 공통 함수, Hook 등을 제공하는 유틸리티 패키지
 
-## 가이드 리스트
+### [@croquiscom/eslint-config](./packages/eslint-config)
+KakaoStyle 프로젝트를 위한 공통 ESLint 설정 패키지
 
-개발 기여, 세팅 등에 필요한 정보는 아래 각 가이드를 참고후 작업하시면 됩니다.
+## Getting Started
 
-- [컨벤션\_가이드](./docusaurus/convention.md)
-- [개발*세팅*가이드](./docusaurus/setting.md)
-- [작업\_가이드](./docusaurus/developer.md)
+### Prerequisites
+- Node.js >= 18
+- pnpm >= 9.14.2
 
-## 패키지 변경사항
+### Installation
 
-패키지별 업데이트 히스토리는 아래 문건 참고 부탁드립니다.
+```bash
+# Install dependencies
+pnpm install
 
-- [CHANGELOG](./CHANGELOG.md)
+# Build all packages
+pnpm build
+
+# Run tests
+pnpm test
+```
+
+## Development
+
+이 프로젝트는 [Turborepo](https://turbo.build/repo)를 사용하여 모노레포를 관리합니다.
+
+### Available Scripts
+
+- `pnpm dev` - 모든 패키지를 개발 모드로 실행
+- `pnpm build` - 모든 패키지 빌드
+- `pnpm lint` - 모든 패키지 린트 검사
+- `pnpm test` - 모든 패키지 테스트 실행
+- `pnpm changeset` - 변경사항 기록
+- `pnpm version-packages` - 패키지 버전 업데이트
+- `pnpm release` - 패키지 배포
+
+### Adding a New Package
+
+1. `packages/` 디렉토리에 새 폴더 생성
+2. `package.json` 파일 생성
+3. 필요한 설정 파일 추가
+4. 루트에서 `pnpm install` 실행
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+MIT
