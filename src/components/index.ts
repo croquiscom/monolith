@@ -5,4 +5,3 @@
 export { Stack } from './stack/Stack';
 export type { StackProps } from './stack/Stack';
 export { SwitchCase } from './switch-case/SwitchCase';
-export type { SwitchCaseProps } from './switch-case/SwitchCase';
