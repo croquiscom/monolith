@@ -25,6 +25,7 @@
     "docs:build": "docusaurus build",
     "test:type": "tsc --skipLibCheck",
     "test": "vitest run",
+    "test:watch": "vitest watch",
     "release:package": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
