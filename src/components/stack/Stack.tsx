@@ -2,8 +2,6 @@ import { PropsWithChildren } from 'react';
 import './Stack.css';
 import { buildFlexClassNames } from './utils/buildFlexClassNames';
 
-type CSSValueWithLength = number | string;
-
 /** The props type of {@link Stack | 'Stack'}. */
 export interface StackProps extends PropsWithChildren {
   /** 컴포넌트에 적용할 CSS 클래스명입니다. */
@@ -11,37 +9,48 @@ export interface StackProps extends PropsWithChildren {
   /** flex-direction 속성을 지정합니다. */
   direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
   /** flex-wrap 속성을 지정합니다. */
-  wrap?: React.CSSProperties['flexWrap'];
+  wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
   /** align-items 속성을 지정합니다. */
-  align?: React.CSSProperties['alignItems'];
+  align?: 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'self-start' | 'self-end' | 'baseline' | 'stretch';
   /** justify-content 속성을 지정합니다. */
-  justify?: React.CSSProperties['justifyContent'];
+  justify?:
+    | 'center'
+    | 'start'
+    | 'end'
+    | 'flex-start'
+    | 'flex-end'
+    | 'left'
+    | 'right'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly'
+    | 'stretch';
   /** gap 속성을 지정합니다. */
   gap?: React.CSSProperties['gap'];
   /** width 속성을 지정합니다. */
-  width?: CSSValueWithLength;
+  width?: number | string;
   /** height 속성을 지정합니다. */
-  height?: CSSValueWithLength;
+  height?: number | string;
   /** margin 속성을 지정합니다. */
-  m?: CSSValueWithLength;
+  m?: number | string;
   /** margin-top 속성을 지정합니다. */
-  mt?: CSSValueWithLength;
+  mt?: number | string;
   /** margin-left 속성을 지정합니다. */
-  ml?: CSSValueWithLength;
+  ml?: number | string;
   /** margin-right 속성을 지정합니다. */
-  mr?: CSSValueWithLength;
+  mr?: number | string;
   /** margin-bottom 속성을 지정합니다. */
-  mb?: CSSValueWithLength;
+  mb?: number | string;
   /** padding 속성을 지정합니다. */
-  p?: CSSValueWithLength;
+  p?: number | string;
   /** padding-top 속성을 지정합니다. */
-  pt?: CSSValueWithLength;
+  pt?: number | string;
   /** padding-left 속성을 지정합니다. */
-  pl?: CSSValueWithLength;
+  pl?: number | string;
   /** padding-right 속성을 지정합니다. */
-  pr?: CSSValueWithLength;
+  pr?: number | string;
   /** padding-bottom 속성을 지정합니다. */
-  pb?: CSSValueWithLength;
+  pb?: number | string;
 }
 
 /**
