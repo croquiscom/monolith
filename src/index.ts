@@ -1,5 +1,6 @@
 // Components
 export { SwitchCase } from './components/switch-case/SwitchCase';
+export { Stack } from './components/stack/Stack';
 
 // Hooks
 export { useMount } from './hooks/use-mount/useMount';
