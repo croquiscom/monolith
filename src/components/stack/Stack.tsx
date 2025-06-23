@@ -1,11 +1,9 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, CSSProperties, HTMLAttributes, forwardRef } from 'react';
 import './Stack.css';
 import { buildFlexClassNames } from './utils/buildFlexClassNames';
 
 /** The props type of {@link Stack | 'Stack'}. */
 export interface StackProps extends PropsWithChildren {
-  /** 컴포넌트에 적용할 CSS 클래스명입니다. */
-  className?: string;
   /** flex-direction 속성을 지정합니다. */
   direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
   /** flex-wrap 속성을 지정합니다. */
@@ -26,7 +24,7 @@ export interface StackProps extends PropsWithChildren {
     | 'space-evenly'
     | 'stretch';
   /** gap 속성을 지정합니다. */
-  gap?: React.CSSProperties['gap'];
+  gap?: CSSProperties['gap'];
   /** width 속성을 지정합니다. */
   width?: number | string;
   /** height 속성을 지정합니다. */
@@ -62,55 +60,81 @@ export interface StackProps extends PropsWithChildren {
  *
  * @example
  * ```tsx
- * <Stack>
- *   <div>Hello</div>
- *   <div>World</div>
+ * // 중앙 정렬, 10px 간격
+ * <Stack justify='center' align='center' gap={10}>
+ *   {children}
+ * </Stack>
+ *
+ * // 양끝 정렬
+ * <Stack justify='space-between'>
+ *   {children}
+ * </Stack>
+ *
+ * // 상단 정렬
+ * <Stack align='flex-start'>
+ *   {children}
+ * </Stack>
+ *
+ * // 가로 방향 정렬
+ * <Stack direction='row'>
+ *   {children}
+ * </Stack>
+ *
+ * // 세로 방향 정렬
+ * <Stack direction='column'>
+ *   {children}
  * </Stack>
  * ```
  */
-export const Stack = ({
-  children,
-  className,
-  direction,
-  wrap,
-  align,
-  justify,
-  gap,
-  width,
-  height,
-  m,
-  mt,
-  ml,
-  mr,
-  mb,
-  p,
-  pt,
-  pl,
-  pr,
-  pb,
-}: StackProps) => {
-  const flexClasses = buildFlexClassNames({ direction, wrap, align, justify });
-  const combinedClasses = [flexClasses, className].filter(Boolean).join(' ');
+export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTMLDivElement>>(
+  (
+    {
+      children,
+      className,
+      direction,
+      wrap,
+      align,
+      justify,
+      gap,
+      width,
+      height,
+      m,
+      mt,
+      ml,
+      mr,
+      mb,
+      p,
+      pt,
+      pl,
+      pr,
+      pb,
+      ...props
+    },
+    ref,
+  ) => {
+    const flex_classes = buildFlexClassNames({ direction, wrap, align, justify });
+    const combined_classes = [flex_classes, className].filter(Boolean).join(' ');
 
-  const spacing_style: React.CSSProperties = {
-    ...(gap !== undefined && { gap }),
-    ...(width !== undefined && { width }),
-    ...(height !== undefined && { height }),
-    ...(m !== undefined && { margin: m }),
-    ...(mt !== undefined && { marginTop: mt }),
-    ...(ml !== undefined && { marginLeft: ml }),
-    ...(mr !== undefined && { marginRight: mr }),
-    ...(mb !== undefined && { marginBottom: mb }),
-    ...(p !== undefined && { padding: p }),
-    ...(pt !== undefined && { paddingTop: pt }),
-    ...(pl !== undefined && { paddingLeft: pl }),
-    ...(pr !== undefined && { paddingRight: pr }),
-    ...(pb !== undefined && { paddingBottom: pb }),
-  };
+    const spacing_style: CSSProperties = {
+      ...(gap !== undefined && { gap }),
+      ...(width !== undefined && { width }),
+      ...(height !== undefined && { height }),
+      ...(m !== undefined && { margin: m }),
+      ...(mt !== undefined && { marginTop: mt }),
+      ...(ml !== undefined && { marginLeft: ml }),
+      ...(mr !== undefined && { marginRight: mr }),
+      ...(mb !== undefined && { marginBottom: mb }),
+      ...(p !== undefined && { padding: p }),
+      ...(pt !== undefined && { paddingTop: pt }),
+      ...(pl !== undefined && { paddingLeft: pl }),
+      ...(pr !== undefined && { paddingRight: pr }),
+      ...(pb !== undefined && { paddingBottom: pb }),
+    };
 
-  return (
-    <div className={combinedClasses} style={spacing_style}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div ref={ref} className={combined_classes} style={spacing_style} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
