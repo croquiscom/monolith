@@ -93,7 +93,7 @@ export const useMount = (effect_callback: EffectCallback) => {
 `Monolith` 패키지의 버전관리는 `changeset` 통한 자동화가 되어있습니다.
 작업이 마무리되었다면 아래 명령어를 입력하여 _작업한 변경사항을 적어주도록 합니다._
 
-> yarn changeset
+> pnpm changeset
 
 이후 아래 이미지처럼 배포내역을 작성한위 확인을 눌러주도록 합니다.
 
