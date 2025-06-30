@@ -1,13 +1,15 @@
+import { CSSProperties } from 'react';
+
 /** The props type of {@link buildFlexClassNames | 'buildFlexClassNames'}. */
 export interface FlexClassNamesParams {
   /** flex-direction 속성을 지정합니다. */
-  direction?: React.CSSProperties['flexDirection'];
+  direction?: CSSProperties['flexDirection'];
   /** flex-wrap 속성을 지정합니다. */
-  wrap?: React.CSSProperties['flexWrap'];
+  wrap?: CSSProperties['flexWrap'];
   /** align-items 속성을 지정합니다. */
-  align?: React.CSSProperties['alignItems'];
+  align?: CSSProperties['alignItems'];
   /** justify-content 속성을 지정합니다. */
-  justify?: React.CSSProperties['justifyContent'];
+  justify?: CSSProperties['justifyContent'];
 }
 
 /**
@@ -16,12 +18,7 @@ export interface FlexClassNamesParams {
  * @param props - {@link FlexClassNamesParams}를 참조하세요.
  * @returns 컴포넌트에 적용할 Flexbox 관련 CSS 클래스명을 반환합니다.
  */
-export const buildFlexClassNames = ({
-  direction,
-  wrap,
-  align,
-  justify,
-}: FlexClassNamesParams): string => {
+export const buildFlexClassNames = ({ direction, wrap, align, justify }: FlexClassNamesParams): string => {
   const classes: string[] = ['flex'];
 
   if (direction) {
