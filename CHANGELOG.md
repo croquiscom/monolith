@@ -1,5 +1,11 @@
 # monolith
 
+## 0.5.1
+
+### Patch Changes
+
+- 28fa7db: Stack/buildFlexClassNames CSSProperties import 추가
+
 ## 0.5.0
 
 ### Minor Changes
