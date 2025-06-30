@@ -1,5 +1,11 @@
 # monolith
 
+## 0.5.0
+
+### Minor Changes
+
+- ed5f005: Stack 컴포넌트 추가
+
 ## 0.4.0
 
 ### Minor Changes
