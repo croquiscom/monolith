@@ -1,5 +1,5 @@
-import { PropsWithChildren, CSSProperties, HTMLAttributes } from 'react';
-import './Stack.css';
+import { PropsWithChildren, CSSProperties, HTMLAttributes, forwardRef } from 'react';
+// import './Stack.css'; // 임시 주석 처리
 import { buildFlexClassNames } from './utils/buildFlexClassNames';
 
 /** The props type of {@link Stack | 'Stack'}. */
@@ -86,50 +86,57 @@ export interface StackProps extends PropsWithChildren {
  * </Stack>
  * ```
  */
-export const Stack = ({
-  children,
-  className,
-  direction,
-  wrap,
-  align,
-  justify,
-  gap,
-  width,
-  height,
-  m,
-  mt,
-  ml,
-  mr,
-  mb,
-  p,
-  pt,
-  pl,
-  pr,
-  pb,
-  ...props
-}: StackProps & HTMLAttributes<HTMLDivElement>) => {
-  const flex_classes = buildFlexClassNames({ direction, wrap, align, justify });
-  const combined_classes = [flex_classes, className].filter(Boolean).join(' ');
+export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTMLDivElement>>(
+  (
+    {
+      children,
+      className,
+      direction,
+      wrap,
+      align,
+      justify,
+      gap,
+      width,
+      height,
+      m,
+      mt,
+      ml,
+      mr,
+      mb,
+      p,
+      pt,
+      pl,
+      pr,
+      pb,
+      ...props
+    },
+    ref,
+  ) => {
+    const flex_classes = buildFlexClassNames({ direction, wrap, align, justify });
+    const combined_classes = [flex_classes, className]
+      .filter((cls) => cls && typeof cls === 'string' && cls.trim() !== '')
+      .join(' ');
 
-  const spacing_style: CSSProperties = {
-    ...(gap !== undefined && { gap }),
-    ...(width !== undefined && { width }),
-    ...(height !== undefined && { height }),
-    ...(m !== undefined && { margin: m }),
-    ...(mt !== undefined && { marginTop: mt }),
-    ...(ml !== undefined && { marginLeft: ml }),
-    ...(mr !== undefined && { marginRight: mr }),
-    ...(mb !== undefined && { marginBottom: mb }),
-    ...(p !== undefined && { padding: p }),
-    ...(pt !== undefined && { paddingTop: pt }),
-    ...(pl !== undefined && { paddingLeft: pl }),
-    ...(pr !== undefined && { paddingRight: pr }),
-    ...(pb !== undefined && { paddingBottom: pb }),
-  };
+    const spacing_style: CSSProperties = {
+      ...(gap !== undefined && { gap }),
+      ...(width !== undefined && { width }),
+      ...(height !== undefined && { height }),
+      ...(m !== undefined && { margin: m }),
+      ...(mt !== undefined && { marginTop: mt }),
+      ...(ml !== undefined && { marginLeft: ml }),
+      ...(mr !== undefined && { marginRight: mr }),
+      ...(mb !== undefined && { marginBottom: mb }),
+      ...(p !== undefined && { padding: p }),
+      ...(pt !== undefined && { paddingTop: pt }),
+      ...(pl !== undefined && { paddingLeft: pl }),
+      ...(pr !== undefined && { paddingRight: pr }),
+      ...(pb !== undefined && { paddingBottom: pb }),
+    };
 
-  return (
-    <div className={combined_classes} style={spacing_style} {...props}>
-      {children}
-    </div>
-  );
-};
+    return (
+      <div ref={ref} className={combined_classes} style={spacing_style} {...props}>
+        {children}
+      </div>
+    );
+  },
+);
