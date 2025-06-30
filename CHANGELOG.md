@@ -1,5 +1,11 @@
 # monolith
 
+## 0.5.4
+
+### Patch Changes
+
+- 100a5ee: react/jsx-runtime 추가
+
 ## 0.5.3
 
 ### Patch Changes
