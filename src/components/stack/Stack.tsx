@@ -1,5 +1,5 @@
 import { PropsWithChildren, CSSProperties, HTMLAttributes, forwardRef } from 'react';
-// import './Stack.css'; // 임시 주석 처리
+import './Stack.css';
 import { buildFlexClassNames } from './utils/buildFlexClassNames';
 
 /** The props type of {@link Stack | 'Stack'}. */
