@@ -1,5 +1,11 @@
 # monolith
 
+## 0.5.2
+
+### Patch Changes
+
+- ef91799: Stack 컴포넌트 forwardRef 제거
+
 ## 0.5.1
 
 ### Patch Changes
