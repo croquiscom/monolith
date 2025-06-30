@@ -1,5 +1,11 @@
 # monolith
 
+## 0.5.3
+
+### Patch Changes
+
+- c65c8a3: Stack컴포넌트 forwardRef 복구 및 import css주석 처리
+
 ## 0.5.2
 
 ### Patch Changes
