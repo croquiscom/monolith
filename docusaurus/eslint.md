@@ -29,15 +29,40 @@ npm install --save-dev @croquiscom/monolith
 
 ## 제공하는 설정
 
-### 1. 기본 설정 (.base.eslintrc.json)
+### 1. 기본 설정 (base.eslint.config.js)
 
 TypeScript, React, 접근성 등 기본적인 규칙들을 포함한 설정입니다.
 
-```json
-// .eslintrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.base.eslintrc.json"]
-}
+> **[중요]**
+>
+> - Monolith의 기본 ESLint 규칙은 **ESLint 8, 9 모두에서 사용 가능합니다.**
+> - **ESLint 9**에서는 flat config 구조가 기본이므로, 기존 base.eslint.config.js를 flat config로 변환하려면 `@eslint/eslintrc`의 `FlatCompat`를 활용해야 합니다.
+> - **ESLint 8 이하**에서는 기존 방식(`.eslintrc.js` 등) 그대로 사용하면 됩니다.
+
+#### ESLint 8 이하 사용 예시
+
+```javascript
+// eslint.config.js 또는 .eslintrc.js
+module.exports = require("@croquiscom/monolith/configs/base.eslint.config.js");
+```
+
+#### ESLint 9(flat config) 사용 예시
+
+```javascript
+// eslint.config.js (ESLint 9+)
+const { FlatCompat } = require("@eslint/eslintrc");
+const js = require("@eslint/js");
+const baseConfig = require("@croquiscom/monolith/configs/base.eslint.config.js");
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+});
+
+module.exports = [
+  ...compat.config(baseConfig),
+  // 필요시 추가 설정
+];
 ```
 
 **포함된 규칙:**
@@ -49,15 +74,13 @@ TypeScript, React, 접근성 등 기본적인 규칙들을 포함한 설정입�
 - Import 순서 및 그룹화 규칙
 - Prettier 연동
 
-### 2. Next.js 설정 (.next.eslintrc.json)
+### 2. Next.js 설정 (next.eslint.config.js)
 
-Next.js 프로젝트에 최적화된 설정입니다. **기본 설정(.base.eslintrc.json)을 확장하여 Next.js 전용 규칙을 추가**합니다.
+Next.js 프로젝트에 최적화된 설정입니다. **기본 설정(base.eslint.config.js)을 확장하여 Next.js 전용 규칙을 추가**합니다.
 
-```json
-// .eslintrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.next.eslintrc.json"]
-}
+```javascript
+// eslint.config.js
+module.exports = require("@croquiscom/monolith/configs/next.eslint.config.js");
 ```
 
 **포함된 규칙:**
@@ -69,15 +92,13 @@ Next.js 프로젝트에 최적화된 설정입니다. **기본 설정(.base.esli
 - `@next/next/no-sync-scripts`
 - 기타 Next.js 모범 사례 규칙들
 
-### 3. Nx 모노레포 설정 (.nx.eslintrc.json)
+### 3. Nx 모노레포 설정 (nx.eslint.config.js)
 
 Nx 모노레포 환경에서 사용하는 설정입니다.
 
-```json
-// .eslintrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.nx.eslintrc.json"]
-}
+```javascript
+// eslint.config.js
+module.exports = require("@croquiscom/monolith/configs/nx.eslint.config.js");
 ```
 
 **포함된 규칙:**
@@ -93,11 +114,9 @@ Monolith 패키지에서 제공하는 Prettier 설정을 사용하여 일관된 
 
 ### Prettier 설정 파일
 
-```json
-// .prettierrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.prettierrc.json"]
-}
+```javascript
+// prettier.config.js
+module.exports = require("@croquiscom/monolith/configs/prettier.config.js");
 ```
 
 **포함된 설정:**
@@ -108,31 +127,26 @@ Monolith 패키지에서 제공하는 Prettier 설정을 사용하여 일관된 
 
 ### Prettier 설정 직접 사용
 
-```json
-// .prettierrc.json
-{
-  "semi": true,
-  "trailingComma": "es5",
-  "singleQuote": true,
-  ...
-  "bracketSameLine": false,
-  "arrowParens": "avoid",
-  "endOfLine": "lf"
-}
+```javascript
+// prettier.config.js
+module.exports = {
+  semi: true,
+  trailingComma: "es5",
+  singleQuote: true,
+  // ...
+  bracketSameLine: false,
+  arrowParens: "avoid",
+  endOfLine: "lf",
+};
 ```
 
 ### ESLint와 Prettier 연동
 
 ESLint 설정에 이미 Prettier 연동이 포함되어 있어 별도 설정이 필요하지 않습니다.
 
-```json
-// .eslintrc.json
-{
-  "extends": [
-    "@croquiscom/monolith/configs/.next.eslintrc.json",
-    "prettier" // 이미 포함됨
-  ]
-}
+```javascript
+// eslint.config.js
+module.exports = require("@croquiscom/monolith/configs/next.eslint.config.js");
 ```
 
 ### Prettier 스크립트 추가
@@ -154,9 +168,17 @@ package.json에 Prettier 스크립트를 추가하여 사용할 수 있습니다
 ```bash
 # 전체 파일 포매팅
 pnpm format
+yarn format
+npm run format
 
 # 포매팅 검사 (CI/CD에서 사용)
 pnpm format:check
+yarn format:check
+npm run format:check
+
+# npx를 사용한 직접 실행
+npx prettier --write .
+npx prettier --check .
 ```
 
 ## 설정 오버라이드
@@ -165,58 +187,68 @@ pnpm format:check
 
 ### Next.js 프로젝트 예시
 
-```json
-// .eslintrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.next.eslintrc.json"],
-  "rules": {
-    "@next/next/no-img-element": "error",
-    "react/display-name": "error"
-  }
-}
+```javascript
+// eslint.config.js
+const baseConfig = require("@croquiscom/monolith/configs/next.eslint.config.js");
+
+module.exports = [
+  ...baseConfig,
+  {
+    rules: {
+      "@next/next/no-img-element": "error",
+      "react/display-name": "error",
+    },
+  },
+];
 ```
 
 ### Nx 모노레포 예시
 
-```json
-// .eslintrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.nx.eslintrc.json"],
-  "rules": {
-    "@nx/enforce-module-boundaries": [
-      "error",
-      {
-        "enforceBuildableLibDependency": true,
-        "allow": ["@my-project/*"],
-        "depConstraints": [
-          {
-            "sourceTag": "level:app",
-            "onlyDependOnLibsWithTags": ["*"]
-          },
-          {
-            "sourceTag": "level:domain",
-            "onlyDependOnLibsWithTags": ["level:common", "level:widget"]
-          },
-          {
-            "sourceTag": "level:common",
-            "onlyDependOnLibsWithTags": ["level:common"]
-          }
-        ]
-      }
-    ]
-  }
-}
+```javascript
+// eslint.config.js
+const baseConfig = require("@croquiscom/monolith/configs/nx.eslint.config.js");
+
+module.exports = [
+  ...baseConfig,
+  {
+    rules: {
+      "@nx/enforce-module-boundaries": [
+        "error",
+        {
+          enforceBuildableLibDependency: true,
+          allow: ["@my-project/*"],
+          depConstraints: [
+            {
+              sourceTag: "level:app",
+              onlyDependOnLibsWithTags: ["*"],
+            },
+            {
+              sourceTag: "level:domain",
+              onlyDependOnLibsWithTags: ["level:common", "level:widget"],
+            },
+            {
+              sourceTag: "level:common",
+              onlyDependOnLibsWithTags: ["level:common"],
+            },
+          ],
+        },
+      ],
+    },
+  },
+];
 ```
 
 ### Prettier 설정 오버라이드
 
-```json
-// .prettierrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.prettierrc.json"],
-  "printWidth": 100,
-  "tabWidth": 4
-}
+```javascript
+// prettier.config.js
+const baseConfig = require("@croquiscom/monolith/configs/prettier.config.js");
+
+module.exports = {
+  ...baseConfig,
+  printWidth: 100,
+  tabWidth: 4,
+};
 ```
 
 ## 규칙 수준
@@ -233,10 +265,11 @@ pnpm format:check
 
 ## 주의사항
 
-1. **규칙 충돌**: Prettier와 충돌하는 규칙들은 자동으로 비활성화됩니다.
-2. **성능**: 대규모 프로젝트에서는 일부 규칙이 성능에 영향을 줄 수 있습니다.
-3. **호환성**: TypeScript 버전에 따라 일부 규칙이 다르게 동작할 수 있습니다.
-4. **Prettier 버전**: Prettier 버전에 따라 일부 설정이 다르게 동작할 수 있습니다.
+1. **ESLint 9 flat config(배열 구조)에서는 기존 base.eslint.config.js를 직접 import해서 사용할 수 없습니다.** 반드시 FlatCompat로 변환해서 사용해야 합니다.
+2. **규칙 충돌**: Prettier와 충돌하는 규칙들은 자동으로 비활성화됩니다.
+3. **성능**: 대규모 프로젝트에서는 일부 규칙이 성능에 영향을 줄 수 있습니다.
+4. **호환성**: TypeScript 버전에 따라 일부 규칙이 다르게 동작할 수 있습니다.
+5. **Prettier 버전**: Prettier 버전에 따라 일부 설정이 다르게 동작할 수 있습니다.
 
 ## 문제 해결
 
@@ -264,12 +297,16 @@ npx prettier --write . --cache-location .prettiercache
 
 ### 특정 파일 제외
 
-```json
-// .eslintrc.json
-{
-  "extends": ["@croquiscom/monolith/configs/.next.eslintrc.json"],
-  "ignorePatterns": ["dist/", "node_modules/", "*.config.js"]
-}
+```javascript
+// eslint.config.js
+const baseConfig = require("@croquiscom/monolith/configs/next.eslint.config.js");
+
+module.exports = [
+  ...baseConfig,
+  {
+    ignores: ["dist/", "node_modules/", "*.config.js"],
+  },
+];
 ```
 
 ```json

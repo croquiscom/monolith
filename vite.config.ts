@@ -26,8 +26,8 @@ const copyConfigsPlugin = () => {
         mkdirSync(distConfigsDir, { recursive: true });
       }
 
-      // JSON 파일들 복사
-      const files = ['.base.eslintrc.json', '.next.eslintrc.json', '.nx.eslintrc.json', '.prettierrc.json'];
+      // 설정 파일들 복사
+      const files = ['base.eslint.config.js', 'next.eslint.config.js', 'nx.eslint.config.js', 'prettier.config.js'];
 
       files.forEach((file) => {
         const srcPath = resolve(configsDir, file);
