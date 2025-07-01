@@ -22,7 +22,7 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveClass('flex flex-column');
+    expect(container.firstChild).toHaveStyle({ display: 'flex', flexDirection: 'column' });
   });
 
   it('wrap prop이 정상적으로 적용됩니다', () => {
@@ -31,7 +31,7 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveClass('flex flex-wrap');
+    expect(container.firstChild).toHaveStyle({ display: 'flex', flexWrap: 'wrap' });
   });
 
   it('align prop이 정상적으로 적용됩니다', () => {
@@ -40,7 +40,7 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveClass('flex align-center');
+    expect(container.firstChild).toHaveStyle({ display: 'flex', alignItems: 'center' });
   });
 
   it('justify prop이 정상적으로 적용됩니다', () => {
@@ -49,7 +49,7 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveClass('flex justify-center');
+    expect(container.firstChild).toHaveStyle({ display: 'flex', justifyContent: 'center' });
   });
 
   it('gap prop이 정상적으로 적용됩니다', () => {
@@ -121,7 +121,13 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveClass('flex flex-column flex-nowrap align-center justify-center');
+    expect(container.firstChild).toHaveStyle({
+      display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'nowrap',
+      alignItems: 'center',
+      justifyContent: 'center',
+    });
     expect(container.firstChild).toHaveStyle({
       gap: '10px',
       width: '100px',

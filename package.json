@@ -8,12 +8,9 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    },
-    "./style.css": "./dist/monolith.css"
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.es.js",
+    "require": "./dist/index.cjs.js"
   },
   "files": [
     "dist"
@@ -21,6 +18,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:clean": "pnpm run build && pnpm run clean:dts",
+    "clean:dts": "find src -name '*.d.ts' -not -name 'vite-env.d.ts' -delete",
     "build:docs": "typedoc",
     "lint:prettier": "prettier . --write",
     "lint": "eslint ./src --ext .ts,.tsx",
