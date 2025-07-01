@@ -1,5 +1,5 @@
 ---
-title: Monolith 개발환경 세팅
+title: Monolith 개발환경 설정
 description: 프로젝트개발시 설치 및 실행 가이드를 제공합니다.
 ---
 

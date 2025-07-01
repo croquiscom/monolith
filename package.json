@@ -8,9 +8,15 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.es.js",
-    "require": "./dist/index.cjs.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./configs/.base.eslintrc.json": "./dist/configs/.base.eslintrc.json",
+    "./configs/.next.eslintrc.json": "./dist/configs/.next.eslintrc.json",
+    "./configs/.nx.eslintrc.json": "./dist/configs/.nx.eslintrc.json",
+    "./configs/.prettierrc.json": "./dist/configs/.prettierrc.json"
   },
   "files": [
     "dist"
