@@ -1,6 +1,4 @@
 import { PropsWithChildren, CSSProperties, HTMLAttributes, forwardRef } from 'react';
-import './Stack.css';
-import { buildFlexClassNames } from './utils/buildFlexClassNames';
 
 /** The props type of {@link Stack | 'Stack'}. */
 export interface StackProps extends PropsWithChildren {
@@ -108,16 +106,17 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
       pl,
       pr,
       pb,
+      style,
       ...props
     },
     ref,
   ) => {
-    const flex_classes = buildFlexClassNames({ direction, wrap, align, justify });
-    const combined_classes = [flex_classes, className]
-      .filter((cls) => cls && typeof cls === 'string' && cls.trim() !== '')
-      .join(' ');
-
-    const spacing_style: CSSProperties = {
+    const combined_style: CSSProperties = {
+      display: 'flex',
+      ...(direction !== undefined && { flexDirection: direction }),
+      ...(wrap !== undefined && { flexWrap: wrap }),
+      ...(align !== undefined && { alignItems: align }),
+      ...(justify !== undefined && { justifyContent: justify }),
       ...(gap !== undefined && { gap }),
       ...(width !== undefined && { width }),
       ...(height !== undefined && { height }),
@@ -131,10 +130,11 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
       ...(pl !== undefined && { paddingLeft: pl }),
       ...(pr !== undefined && { paddingRight: pr }),
       ...(pb !== undefined && { paddingBottom: pb }),
+      ...style,
     };
 
     return (
-      <div ref={ref} className={combined_classes} style={spacing_style} {...props}>
+      <div ref={ref} className={className} style={combined_style} {...props}>
         {children}
       </div>
     );
