@@ -1,5 +1,11 @@
 # monolith
 
+## 0.5.5
+
+### Patch Changes
+
+- f07797f: Stack컴포넌트 css제거 및 props_to_style 형태로 변경
+
 ## 0.5.4
 
 ### Patch Changes
