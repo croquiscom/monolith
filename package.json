@@ -18,6 +18,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:clean": "pnpm run build && pnpm run clean:dts",
+    "clean:dts": "find src -name '*.d.ts' -not -name 'vite-env.d.ts' -delete",
     "build:docs": "typedoc",
     "lint:prettier": "prettier . --write",
     "lint": "eslint ./src --ext .ts,.tsx",
