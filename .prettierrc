@@ -1,3 +1,0 @@
-{
-  "extends": ["./src/configs/prettier.config.js"]
-}

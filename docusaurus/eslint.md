@@ -43,16 +43,16 @@ TypeScript, React, 접근성 등 기본적인 규칙들을 포함한 설정입�
 
 ```javascript
 // eslint.config.js 또는 .eslintrc.js
-module.exports = require("@croquiscom/monolith/configs/base.eslint.config.js");
+module.exports = require('@croquiscom/monolith/configs/base.eslint.config.js');
 ```
 
 #### ESLint 9(flat config) 사용 예시
 
 ```javascript
 // eslint.config.js (ESLint 9+)
-const { FlatCompat } = require("@eslint/eslintrc");
-const js = require("@eslint/js");
-const baseConfig = require("@croquiscom/monolith/configs/base.eslint.config.js");
+const { FlatCompat } = require('@eslint/eslintrc');
+const js = require('@eslint/js');
+const baseConfig = require('@croquiscom/monolith/configs/base.eslint.config.js');
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -80,7 +80,7 @@ Next.js 프로젝트에 최적화된 설정입니다. **기본 설정(base.eslin
 
 ```javascript
 // eslint.config.js
-module.exports = require("@croquiscom/monolith/configs/next.eslint.config.js");
+module.exports = require('@croquiscom/monolith/configs/next.eslint.config.js');
 ```
 
 **포함된 규칙:**
@@ -98,7 +98,7 @@ Nx 모노레포 환경에서 사용하는 설정입니다.
 
 ```javascript
 // eslint.config.js
-module.exports = require("@croquiscom/monolith/configs/nx.eslint.config.js");
+module.exports = require('@croquiscom/monolith/configs/nx.eslint.config.js');
 ```
 
 **포함된 규칙:**
@@ -116,7 +116,7 @@ Monolith 패키지에서 제공하는 Prettier 설정을 사용하여 일관된 
 
 ```javascript
 // prettier.config.js
-module.exports = require("@croquiscom/monolith/configs/prettier.config.js");
+module.exports = require('@croquiscom/monolith/configs/prettier.config.js');
 ```
 
 **포함된 설정:**
@@ -131,12 +131,12 @@ module.exports = require("@croquiscom/monolith/configs/prettier.config.js");
 // prettier.config.js
 module.exports = {
   semi: true,
-  trailingComma: "es5",
+  trailingComma: 'es5',
   singleQuote: true,
   // ...
   bracketSameLine: false,
-  arrowParens: "avoid",
-  endOfLine: "lf",
+  arrowParens: 'avoid',
+  endOfLine: 'lf',
 };
 ```
 
@@ -146,7 +146,7 @@ ESLint 설정에 이미 Prettier 연동이 포함되어 있어 별도 설정이 
 
 ```javascript
 // eslint.config.js
-module.exports = require("@croquiscom/monolith/configs/next.eslint.config.js");
+module.exports = require('@croquiscom/monolith/configs/next.eslint.config.js');
 ```
 
 ### Prettier 스크립트 추가
@@ -189,14 +189,14 @@ npx prettier --check .
 
 ```javascript
 // eslint.config.js
-const baseConfig = require("@croquiscom/monolith/configs/next.eslint.config.js");
+const baseConfig = require('@croquiscom/monolith/configs/next.eslint.config.js');
 
 module.exports = [
   ...baseConfig,
   {
     rules: {
-      "@next/next/no-img-element": "error",
-      "react/display-name": "error",
+      '@next/next/no-img-element': 'error',
+      'react/display-name': 'error',
     },
   },
 ];
@@ -206,29 +206,29 @@ module.exports = [
 
 ```javascript
 // eslint.config.js
-const baseConfig = require("@croquiscom/monolith/configs/nx.eslint.config.js");
+const baseConfig = require('@croquiscom/monolith/configs/nx.eslint.config.js');
 
 module.exports = [
   ...baseConfig,
   {
     rules: {
-      "@nx/enforce-module-boundaries": [
-        "error",
+      '@nx/enforce-module-boundaries': [
+        'error',
         {
           enforceBuildableLibDependency: true,
-          allow: ["@my-project/*"],
+          allow: ['@my-project/*'],
           depConstraints: [
             {
-              sourceTag: "level:app",
-              onlyDependOnLibsWithTags: ["*"],
+              sourceTag: 'level:app',
+              onlyDependOnLibsWithTags: ['*'],
             },
             {
-              sourceTag: "level:domain",
-              onlyDependOnLibsWithTags: ["level:common", "level:widget"],
+              sourceTag: 'level:domain',
+              onlyDependOnLibsWithTags: ['level:common', 'level:widget'],
             },
             {
-              sourceTag: "level:common",
-              onlyDependOnLibsWithTags: ["level:common"],
+              sourceTag: 'level:common',
+              onlyDependOnLibsWithTags: ['level:common'],
             },
           ],
         },
@@ -242,7 +242,7 @@ module.exports = [
 
 ```javascript
 // prettier.config.js
-const baseConfig = require("@croquiscom/monolith/configs/prettier.config.js");
+const baseConfig = require('@croquiscom/monolith/configs/prettier.config.js');
 
 module.exports = {
   ...baseConfig,
@@ -299,12 +299,12 @@ npx prettier --write . --cache-location .prettiercache
 
 ```javascript
 // eslint.config.js
-const baseConfig = require("@croquiscom/monolith/configs/next.eslint.config.js");
+const baseConfig = require('@croquiscom/monolith/configs/next.eslint.config.js');
 
 module.exports = [
   ...baseConfig,
   {
-    ignores: ["dist/", "node_modules/", "*.config.js"],
+    ignores: ['dist/', 'node_modules/', '*.config.js'],
   },
 ];
 ```
