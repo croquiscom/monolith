@@ -1,34 +1,34 @@
 module.exports = {
-  extends: ['plugin:@nx/recommended'],
   plugins: ['@nx'],
   rules: {
     '@nx/enforce-module-boundaries': [
-      'warn',
+      'error',
       {
         enforceBuildableLibDependency: true,
         allow: [],
         depConstraints: [
+          { sourceTag: '*', onlyDependOnLibsWithTags: ['*'] },
           {
-            sourceTag: '*',
-            onlyDependOnLibsWithTags: ['*'],
+            sourceTag: 'scope:util',
+            onlyDependOnLibsWithTags: [],
+          },
+          {
+            sourceTag: 'scope:feature',
+            onlyDependOnLibsWithTags: ['scope:util'],
           },
         ],
       },
     ],
+    '@nx/workspace-enforce-button-loading': 'error',
     '@nx/workspace-no-location-href-assign': 'error',
-    '@nx/workspace-no-relative-imports': 'error',
-    '@nx/workspace-no-circular-dependencies': 'error',
-    '@nx/workspace-no-implicit-dependencies': 'error',
-    '@nx/workspace-no-unused-dependencies': 'error',
+    '@nx/workspace-no-unsafe-mutation-with-barcode': 'warn',
   },
-  ignorePatterns: [
-    '.nx/**',
-    'tmp/**',
-    'dist/**',
-    'node_modules/**',
-    'coverage/**',
-    '*.d.ts',
-    '*.config.js',
-    '*.config.ts',
+  overrides: [
+    {
+      files: ['*.tsx'],
+      rules: {
+        '@nx/workspace-enforce-button-loading': 'error',
+      },
+    },
   ],
 };
