@@ -28,7 +28,10 @@ module.exports = {
     warnOnUnsupportedTypeScriptVersion: true,
   },
   settings: {
-    react: { version: 'detect' },
+    'react': { version: 'detect' },
+    'import/resolver': {
+      typescript: {},
+    },
   },
   plugins: ['@typescript-eslint', 'import', 'react', 'react-hooks', 'jsx-a11y', 'prettier'],
   rules: {
@@ -153,7 +156,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
     '@typescript-eslint/no-unused-expressions': [
       'error',
       {

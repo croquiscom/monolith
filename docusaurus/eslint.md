@@ -28,7 +28,7 @@ pnpm add -D @croquiscom/monolith
 ### 2. 필수 의존성 설치
 
 ```bash
-pnpm add -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier
+pnpm add -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier eslint-import-resolver-typescript
 ```
 
 #### Next.js 설정 사용 시 (선택)
@@ -119,6 +119,7 @@ my-nx-workspace/
 
 - **설정이 적용되지 않는 경우**: ESLint 캐시 삭제, IDE 재시작
 - **플러그인/파서 에러**: peerDependencies 설치 확인
+- **TypeScript alias(import 경로 단축) 관련 에러**: `eslint-import-resolver-typescript`가 설치되어 있는지, 그리고 base.eslint.config.js의 settings에 `import/resolver: { typescript: {} }`가 포함되어 있는지 확인하세요.
 - **Nx/Next.js 관련 규칙 에러**: 선택적 의존성 설치 확인
 
 ## 참고
