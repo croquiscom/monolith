@@ -1,8 +1,11 @@
 import { CSSProperties, HTMLAttributes, forwardRef, ElementType } from 'react';
 
 /** The props type of {@link Stack | 'Stack'}. */
-export interface StackProps extends HTMLAttributes<HTMLDivElement> {
-  /** */
+export interface StackProps {
+  /**
+   * ElementType 을 지정 합니다.
+   * @default "div"
+   */
   as?: ElementType;
   /** inline-flex 사용 설정 */
   inline?: boolean;
@@ -82,7 +85,7 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
  * </Stack>
  * ```
  */
-export const Stack = forwardRef<HTMLDivElement, StackProps>(
+export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTMLDivElement>>(
   (
     {
       as: Root = 'div',
