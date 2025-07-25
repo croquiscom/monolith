@@ -1,5 +1,11 @@
 # monolith
 
+## 0.6.0
+
+### Minor Changes
+
+- a927d2b: Stack 컴포넌트 Props 확장
+
 ## 0.5.5
 
 ### Patch Changes
