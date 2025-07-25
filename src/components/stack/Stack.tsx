@@ -115,7 +115,6 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
   ) => {
     return (
       <Root
-        {...rest}
         ref={ref}
         style={{
           display: inline ? 'inline-flex' : 'flex',
@@ -138,6 +137,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
           ...(pb !== undefined && { paddingBottom: pb }),
           ...style,
         }}
+        {...rest}
       >
         {children}
       </Root>
