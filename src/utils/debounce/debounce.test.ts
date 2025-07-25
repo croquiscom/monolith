@@ -1,5 +1,6 @@
-import { debounce } from './debounce';
 import { afterAll, beforeAll, beforeEach } from 'vitest';
+
+import { debounce } from './debounce';
 
 vi.useFakeTimers();
 

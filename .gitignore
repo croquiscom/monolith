@@ -14,9 +14,11 @@ dist-ssr
 
 .docusaurus
 build
-dist
 docs
 
+# TypeScript build cache
+*.tsbuildinfo
+tsconfig.*.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
@@ -28,3 +30,4 @@ docs
 *.njsproj
 *.sln
 *.sw?
+CLAUDE.md
