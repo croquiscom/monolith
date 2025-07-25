@@ -1,52 +1,48 @@
-import { PropsWithChildren, CSSProperties, HTMLAttributes, forwardRef } from 'react';
+import { CSSProperties, HTMLAttributes, forwardRef, ElementType } from 'react';
 
 /** The props type of {@link Stack | 'Stack'}. */
-export interface StackProps extends PropsWithChildren {
+export interface StackProps {
+  /**
+   * ElementType 을 지정 합니다.
+   * @default "div"
+   */
+  as?: ElementType;
+  /** inline-flex 사용 설정 */
+  inline?: boolean;
   /** flex-direction 속성을 지정합니다. */
-  direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+  direction?: CSSProperties['flexDirection'];
   /** flex-wrap 속성을 지정합니다. */
-  wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
+  wrap?: CSSProperties['flexWrap'];
   /** align-items 속성을 지정합니다. */
-  align?: 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'self-start' | 'self-end' | 'baseline' | 'stretch';
+  align?: CSSProperties['alignItems'];
   /** justify-content 속성을 지정합니다. */
-  justify?:
-    | 'center'
-    | 'start'
-    | 'end'
-    | 'flex-start'
-    | 'flex-end'
-    | 'left'
-    | 'right'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly'
-    | 'stretch';
+  justify?: CSSProperties['justifyContent'];
   /** gap 속성을 지정합니다. */
   gap?: CSSProperties['gap'];
   /** width 속성을 지정합니다. */
-  width?: number | string;
+  width?: CSSProperties['width'];
   /** height 속성을 지정합니다. */
-  height?: number | string;
+  height?: CSSProperties['height'];
   /** margin 속성을 지정합니다. */
-  m?: number | string;
+  m?: CSSProperties['margin'];
   /** margin-top 속성을 지정합니다. */
-  mt?: number | string;
+  mt?: CSSProperties['marginTop'];
   /** margin-left 속성을 지정합니다. */
-  ml?: number | string;
+  ml?: CSSProperties['marginLeft'];
   /** margin-right 속성을 지정합니다. */
-  mr?: number | string;
+  mr?: CSSProperties['marginRight'];
   /** margin-bottom 속성을 지정합니다. */
-  mb?: number | string;
+  mb?: CSSProperties['marginBottom'];
   /** padding 속성을 지정합니다. */
-  p?: number | string;
+  p?: CSSProperties['padding'];
   /** padding-top 속성을 지정합니다. */
-  pt?: number | string;
+  pt?: CSSProperties['paddingTop'];
   /** padding-left 속성을 지정합니다. */
-  pl?: number | string;
+  pl?: CSSProperties['paddingLeft'];
   /** padding-right 속성을 지정합니다. */
-  pr?: number | string;
+  pr?: CSSProperties['paddingRight'];
   /** padding-bottom 속성을 지정합니다. */
-  pb?: number | string;
+  pb?: CSSProperties['paddingBottom'];
 }
 
 /**
@@ -82,13 +78,18 @@ export interface StackProps extends PropsWithChildren {
  * <Stack direction='column'>
  *   {children}
  * </Stack>
+ *
+ * // inline flex 설정
+ * <Stack inline>
+ *   {children}
+ * </Stack>
  * ```
  */
 export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTMLDivElement>>(
   (
     {
-      children,
-      className,
+      as: Root = 'div',
+      inline,
       direction,
       wrap,
       align,
@@ -107,36 +108,39 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
       pr,
       pb,
       style,
-      ...props
+      children,
+      ...rest
     },
     ref,
   ) => {
-    const combined_style: CSSProperties = {
-      display: 'flex',
-      ...(direction !== undefined && { flexDirection: direction }),
-      ...(wrap !== undefined && { flexWrap: wrap }),
-      ...(align !== undefined && { alignItems: align }),
-      ...(justify !== undefined && { justifyContent: justify }),
-      ...(gap !== undefined && { gap }),
-      ...(width !== undefined && { width }),
-      ...(height !== undefined && { height }),
-      ...(m !== undefined && { margin: m }),
-      ...(mt !== undefined && { marginTop: mt }),
-      ...(ml !== undefined && { marginLeft: ml }),
-      ...(mr !== undefined && { marginRight: mr }),
-      ...(mb !== undefined && { marginBottom: mb }),
-      ...(p !== undefined && { padding: p }),
-      ...(pt !== undefined && { paddingTop: pt }),
-      ...(pl !== undefined && { paddingLeft: pl }),
-      ...(pr !== undefined && { paddingRight: pr }),
-      ...(pb !== undefined && { paddingBottom: pb }),
-      ...style,
-    };
-
     return (
-      <div ref={ref} className={className} style={combined_style} {...props}>
+      <Root
+        ref={ref}
+        style={{
+          display: inline ? 'inline-flex' : 'flex',
+          ...(direction !== undefined && { flexDirection: direction }),
+          ...(wrap !== undefined && { flexWrap: wrap }),
+          ...(align !== undefined && { alignItems: align }),
+          ...(justify !== undefined && { justifyContent: justify }),
+          ...(gap !== undefined && { gap }),
+          ...(width !== undefined && { width }),
+          ...(height !== undefined && { height }),
+          ...(m !== undefined && { margin: m }),
+          ...(mt !== undefined && { marginTop: mt }),
+          ...(ml !== undefined && { marginLeft: ml }),
+          ...(mr !== undefined && { marginRight: mr }),
+          ...(mb !== undefined && { marginBottom: mb }),
+          ...(p !== undefined && { padding: p }),
+          ...(pt !== undefined && { paddingTop: pt }),
+          ...(pl !== undefined && { paddingLeft: pl }),
+          ...(pr !== undefined && { paddingRight: pr }),
+          ...(pb !== undefined && { paddingBottom: pb }),
+          ...style,
+        }}
+        {...rest}
+      >
         {children}
-      </div>
+      </Root>
     );
   },
 );
