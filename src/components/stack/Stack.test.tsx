@@ -52,6 +52,15 @@ describe('Stack', () => {
     expect(container.firstChild).toHaveStyle({ display: 'flex', justifyContent: 'center' });
   });
 
+  it('flex prop이 정상적으로 적용됩니다', () => {
+    const { container } = render(
+      <Stack flex='1 0 100px'>
+        <div>1번</div>
+      </Stack>,
+    );
+    expect(container.firstChild).toHaveStyle({ display: 'flex', flex: '1 0 100px' });
+  });
+
   it('gap prop이 정상적으로 적용됩니다', () => {
     const { container } = render(
       <Stack gap={10}>
