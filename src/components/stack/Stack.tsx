@@ -17,6 +17,8 @@ export interface StackProps {
   align?: CSSProperties['alignItems'];
   /** justify-content 속성을 지정합니다. */
   justify?: CSSProperties['justifyContent'];
+  /** flex 속성을 지정합니다. */
+  flex?: CSSProperties['flex'];
   /** gap 속성을 지정합니다. */
   gap?: CSSProperties['gap'];
   /** width 속성을 지정합니다. */
@@ -94,6 +96,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
       wrap,
       align,
       justify,
+      flex,
       gap,
       width,
       height,
@@ -122,6 +125,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps & HTMLAttributes<HTML
           ...(wrap !== undefined && { flexWrap: wrap }),
           ...(align !== undefined && { alignItems: align }),
           ...(justify !== undefined && { justifyContent: justify }),
+          ...(flex !== undefined && { flex }),
           ...(gap !== undefined && { gap }),
           ...(width !== undefined && { width }),
           ...(height !== undefined && { height }),
