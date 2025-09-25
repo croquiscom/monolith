@@ -1,5 +1,11 @@
 # monolith
 
+## 0.7.0
+
+### Minor Changes
+
+- 754bdcc: Stack 컴포넌트 flex props 추가
+
 ## 0.6.0
 
 ### Minor Changes
