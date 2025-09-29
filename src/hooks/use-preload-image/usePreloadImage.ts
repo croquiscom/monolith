@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
  *
  * @param image_src_list - preload 할 이미지 링크리스트
  * @return is_preload_completed - preload 완료 여부
- * 
- * @example 
+ *
+ * @example
  *  const is_completed_load_image = usePreloadImage(['https://example.com/image1.jpg', 'https://example.com/image2.jpg']);
  * is_completed_load_image - true(전부 이미지 로드가 완료된 경우 true 아니면 false)
  */
@@ -41,5 +41,3 @@ export const usePreloadImage = (image_src_list: string[]) => {
 
   return is_preload_completed;
 };
-
-
