@@ -25,7 +25,7 @@ interface Props {
    * </LazyEvaluation>
    * ```
    */
-  children?: (isEvaluate: boolean) => ReactNode;
+  children: (isEvaluate: boolean) => ReactNode;
 }
 
 /**
@@ -68,5 +68,5 @@ export const LazyEvaluation = ({ isEvaluate = false, children }: Props) => {
   if (!hasBeenEvaluated.current) {
     hasBeenEvaluated.current = isEvaluate;
   }
-  return hasBeenEvaluated.current ? children?.(isEvaluate) : null;
+  return hasBeenEvaluated.current ? children(isEvaluate) : null;
 };

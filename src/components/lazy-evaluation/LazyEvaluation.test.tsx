@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import { LazyEvaluation } from './LazyEvaluation';
-import '@testing-library/jest-dom';
 
 describe('LazyEvaluation', () => {
   it('isEvaluate가 false일 때 children을 렌더링하지 않습니다', () => {
@@ -50,11 +49,5 @@ describe('LazyEvaluation', () => {
   it('isEvaluate가 생략되면 기본값 false로 동작합니다', () => {
     const { container } = render(<LazyEvaluation>{() => <div>테스트 컴포넌트</div>}</LazyEvaluation>);
     expect(container.firstChild).toBeNull();
-  });
-
-  it('children이 없어도 오류가 발생하지 않습니다', () => {
-    expect(() => {
-      render(<LazyEvaluation isEvaluate={true} />);
-    }).not.toThrow();
   });
 });
