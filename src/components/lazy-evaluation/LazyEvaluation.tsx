@@ -65,8 +65,8 @@ interface Props {
  */
 export const LazyEvaluation = ({ isEvaluate = false, children }: Props) => {
   const hasBeenEvaluated = useRef<boolean>(isEvaluate);
-  if (!hasBeenEvaluated.current) {
-    hasBeenEvaluated.current = isEvaluate;
+  if (isEvaluate) {
+    hasBeenEvaluated.current = true;
   }
   return hasBeenEvaluated.current ? children(isEvaluate) : null;
 };
