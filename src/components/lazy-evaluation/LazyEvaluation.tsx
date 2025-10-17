@@ -1,8 +1,31 @@
 import { ReactNode, useRef } from 'react';
 
 interface Props {
+  /**
+   * 지연 평가를 즉시 실행할지 여부를 결정하는 플래그
+   * true인 경우 children이 즉시 평가되어 렌더링됨
+   * false 또는 undefined인 경우 지연 평가 상태를 유지
+   * @default false
+   */
   isEvaluate?: boolean;
-  children?: (is_evaluate: boolean) => ReactNode;
+  /**
+   * 지연 평가 상태를 받아서 ReactNode를 반환하는 렌더 함수
+   *
+   * @param isEvaluate - 현재 컴포넌트의 평가 상태 (isEvaluate prop 값)
+   * @returns 렌더링할 React 요소
+   *
+   * @example
+   * ```tsx
+   * <LazyEvaluation isEvaluate={activeTab === 'analytics'}>
+   *   {(isActive) => (
+   *     <div style={{ display: isActive ? 'block' : 'none' }}>
+   *       <HeavyAnalyticsChart />
+   *     </div>
+   *   )}
+   * </LazyEvaluation>
+   * ```
+   */
+  children?: (isEvaluate: boolean) => ReactNode;
 }
 
 /**
@@ -17,9 +40,28 @@ interface Props {
  * @param children 지연 평가할 컴포넌트를 반환하는 함수
  *
  * @example
- * <LazyEvaluation isEvaluate={isShowHeavyComponent}>
- *   {() => <HeavyComponent />}
- * </LazyEvaluation>
+ * ```tsx
+ * <>
+ *   <TabRoot>
+ *     <TabItem tabId="list">상품목록</TabItem>
+ *     <TabItem tabId="analytics">분석</TabItem>
+ *   </TabRoot>
+ *   <LazyEvaluation isEvaluate={activeTab === 'list'}>
+ *     {(isActive) => (
+ *       <div style={{ display: isActive ? 'block' : 'none' }}>
+ *         <HeavyProductList />
+ *       </div>
+ *     )}
+ *   </LazyEvaluation>
+ *   <LazyEvaluation isEvaluate={activeTab === 'analytics'}>
+ *     {(isActive) => (
+ *       <div style={{ display: isActive ? 'block' : 'none' }}>
+ *         <HeavyAnalyticsChart />
+ *       </div>
+ *     )}
+ *   </LazyEvaluation>
+ * </>
+ * ```
  */
 export const LazyEvaluation = ({ isEvaluate = false, children }: Props) => {
   const hasBeenEvaluated = useRef<boolean>(isEvaluate);
