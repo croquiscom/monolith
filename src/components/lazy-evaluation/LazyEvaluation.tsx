@@ -1,4 +1,5 @@
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useState } from 'react';
+import { useIsomorphicLayoutEffect } from '../../hooks';
 
 interface Props {
   /**
@@ -64,9 +65,13 @@ interface Props {
  * ```
  */
 export const LazyEvaluation = ({ isEvaluate = false, children }: Props) => {
-  const hasBeenEvaluated = useRef<boolean>(isEvaluate);
-  if (isEvaluate) {
-    hasBeenEvaluated.current = true;
-  }
-  return hasBeenEvaluated.current ? children(isEvaluate) : null;
+  const [hasBeenEvaluated, setHasBeenEvaluated] = useState<boolean>(isEvaluate);
+
+  useIsomorphicLayoutEffect(() => {
+    if (isEvaluate) {
+      setHasBeenEvaluated(true);
+    }
+  }, [isEvaluate]);
+
+  return hasBeenEvaluated ? children(isEvaluate) : null;
 };
