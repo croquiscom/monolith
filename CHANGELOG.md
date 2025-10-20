@@ -1,5 +1,11 @@
 # monolith
 
+## 0.8.0
+
+### Minor Changes
+
+- bdd6ece: 무거운 컴포넌트의 조건부 렌더링을 최적화하는 LazyEvaluation 컴포넌트 추가
+
 ## 0.7.0
 
 ### Minor Changes
