@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+
 import { Stack } from './Stack';
 import '@testing-library/jest-dom';
 
@@ -22,7 +23,10 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveStyle({ display: 'flex', flexDirection: 'column' });
+    expect(container.firstChild).toHaveStyle({
+      display: 'flex',
+      flexDirection: 'column',
+    });
   });
 
   it('wrap prop이 정상적으로 적용됩니다', () => {
@@ -31,7 +35,10 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveStyle({ display: 'flex', flexWrap: 'wrap' });
+    expect(container.firstChild).toHaveStyle({
+      display: 'flex',
+      flexWrap: 'wrap',
+    });
   });
 
   it('align prop이 정상적으로 적용됩니다', () => {
@@ -40,7 +47,10 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveStyle({ display: 'flex', alignItems: 'center' });
+    expect(container.firstChild).toHaveStyle({
+      display: 'flex',
+      alignItems: 'center',
+    });
   });
 
   it('justify prop이 정상적으로 적용됩니다', () => {
@@ -49,7 +59,10 @@ describe('Stack', () => {
         <div>1번</div>
       </Stack>,
     );
-    expect(container.firstChild).toHaveStyle({ display: 'flex', justifyContent: 'center' });
+    expect(container.firstChild).toHaveStyle({
+      display: 'flex',
+      justifyContent: 'center',
+    });
   });
 
   it('flex prop이 정상적으로 적용됩니다', () => {

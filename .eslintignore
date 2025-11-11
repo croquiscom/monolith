@@ -1,0 +1,26 @@
+# ESLint 설정 파일들
+.eslintrc.js
+eslint.config.js
+
+# 기타 설정 파일들
+*.config.js
+*.config.ts
+prettier.config.js
+vite.config.ts
+docusaurus.config.ts
+typedoc.json
+tsconfig*.json
+
+# 빌드 결과물
+dist/
+node_modules/
+coverage/
+
+# 문서
+docusaurus/
+docs/
+
+# 기타
+.git/
+.changeset/
+.github/ 

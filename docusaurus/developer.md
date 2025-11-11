@@ -1,6 +1,6 @@
 ---
-title: Monolith 작업 가이드
-description: 프로젝트를 작업하는 가이드를 제공합니다.
+title: Monolith 개발 가이드
+description: 프로젝트를 개발하는 가이드를 제공합니다.
 ---
 
 # Monolith 작업 가이드
