@@ -1,6 +1,7 @@
 // Components
 export { SwitchCase } from './components/switch-case/SwitchCase';
 export { Stack } from './components/stack/Stack';
+export { LazyEvaluation } from './components/lazy-evaluation/LazyEvaluation';
 
 // Hooks
 export { useMount } from './hooks/use-mount/useMount';
