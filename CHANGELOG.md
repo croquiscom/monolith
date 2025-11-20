@@ -1,5 +1,11 @@
 # monolith
 
+## 0.8.1
+
+### Patch Changes
+
+- a7639d0: LazyEvaluation 컴포넌트 export
+
 ## 0.8.0
 
 ### Minor Changes
