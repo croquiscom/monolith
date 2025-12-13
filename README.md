@@ -14,8 +14,9 @@
 개발 기여, 세팅 등에 필요한 정보는 아래 각 가이드를 참고후 작업하시면 됩니다.
 
 - [컨벤션\_가이드](./docusaurus/convention.md)
-- [개발*세팅*가이드](./docusaurus/setting.md)
-- [작업\_가이드](./docusaurus/developer.md)
+- [개발환경\_설정\_가이드](./docusaurus/setting.md)
+- [개발\_가이드](./docusaurus/developer.md)
+- [ESLint\_설정\_가이드](./docusaurus/eslint.md)
 
 ## 패키지 변경사항
 
