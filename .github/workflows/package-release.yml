@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     name: Release
@@ -39,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Upgrade npm for OIDC support
+        run: npm install -g npm@11.7.0
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
@@ -46,9 +54,7 @@ jobs:
           version: pnpm changeset version
           publish: pnpm release:package
         env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_GITHUB }}
-          NPM_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_NPM }}
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_NPM }}
+          GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_GITHUB }}          
 
       - name: build docuasurus
         if: steps.changesets.outputs.published == 'true'
