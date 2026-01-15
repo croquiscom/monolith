@@ -1,5 +1,6 @@
-import { throttle } from './throttle';
 import { afterAll, beforeAll, beforeEach } from 'vitest';
+
+import { throttle } from './throttle';
 
 vi.useFakeTimers();
 

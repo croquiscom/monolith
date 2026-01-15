@@ -1,4 +1,5 @@
 import { useMemo, useRef } from 'react';
+
 import { throttle } from '../../utils/throttle/throttle';
 
 type AnyFunc<T extends unknown[]> = (...args: T) => unknown;

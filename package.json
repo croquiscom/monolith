@@ -8,9 +8,31 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.es.js",
-    "require": "./dist/index.cjs.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./configs/base.eslint.config.js": {
+      "types": "./dist/configs/base.eslint.config.js",
+      "import": "./dist/configs/base.eslint.config.js",
+      "require": "./dist/configs/base.eslint.config.js"
+    },
+    "./configs/next.eslint.config.js": {
+      "types": "./dist/configs/next.eslint.config.js",
+      "import": "./dist/configs/next.eslint.config.js",
+      "require": "./dist/configs/next.eslint.config.js"
+    },
+    "./configs/nx.eslint.config.js": {
+      "types": "./dist/configs/nx.eslint.config.js",
+      "import": "./dist/configs/nx.eslint.config.js",
+      "require": "./dist/configs/nx.eslint.config.js"
+    },
+    "./configs/prettier.config.js": {
+      "types": "./dist/configs/prettier.config.js",
+      "import": "./dist/configs/prettier.config.js",
+      "require": "./dist/configs/prettier.config.js"
+    }
   },
   "files": [
     "dist"
@@ -21,8 +43,10 @@
     "build:clean": "pnpm run build && pnpm run clean:dts",
     "clean:dts": "find src -name '*.d.ts' -not -name 'vite-env.d.ts' -delete",
     "build:docs": "typedoc",
-    "lint:prettier": "prettier . --write",
     "lint": "eslint ./src --ext .ts,.tsx",
+    "lint:prettier": "prettier . --write",
+    "lint:fix": "eslint ./src --ext .ts,.tsx --fix",
+    "lint:all": "pnpm lint:fix && pnpm lint:prettier",
     "preview": "vite preview",
     "docs": "http-server -o ./docs/index.html",
     "docs:generate": "typedoc",
@@ -34,8 +58,31 @@
     "release:package": "pnpm run build && changeset publish"
   },
   "peerDependencies": {
-    "react": "^19 || ^18 || ^17",
-    "react-dom": "^19 || ^18 || ^17"
+    "@typescript-eslint/eslint-plugin": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@typescript-eslint/parser": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-import": "^2.0.0 || ^3.0.0",
+    "eslint-plugin-jsx-a11y": "^6.0.0 || ^7.0.0",
+    "eslint-plugin-prettier": "^4.0.0 || ^5.0.0",
+    "eslint-plugin-react": "^7.0.0 || ^8.0.0",
+    "eslint-plugin-react-hooks": "^4.0.0 || ^5.0.0",
+    "prettier": "^2.0.0 || ^3.0.0",
+    "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@next/eslint-plugin-next": {
+      "optional": true
+    },
+    "@nx/eslint-plugin": {
+      "optional": true
+    },
+    "jsonc-eslint-parser": {
+      "optional": true
+    },
+    "eslint-plugin-react-refresh": {
+      "optional": true
+    }
   },
   "dependencies": {
     "blueimp-load-image": "^5.16.0",
@@ -48,8 +95,9 @@
     "@docusaurus/preset-classic": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "^3.7.0",
-    "@eslint/js": "^9.21.0",
     "@mdx-js/react": "^3.0.0",
+    "@next/eslint-plugin-next": "^15.3.4",
+    "@nx/eslint-plugin": "^21.2.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -58,10 +106,17 @@
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.8.0",
     "docusaurus-plugin-typedoc": "^1.2.3",
-    "eslint": "^9.21.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint": "^8.0.0",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "http-server": "^14.1.1",
@@ -75,7 +130,6 @@
     "typedoc-material-theme": "^1.3.0",
     "typedoc-plugin-markdown": "4.4.2",
     "typescript": "~5.7.2",
-    "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
     "vite-plugin-dts": "^4.5.3",
     "vitest": "^3.0.8"

@@ -1,5 +1,6 @@
-import { compressImage } from './compressImage';
 import { vi, describe, it, expect, beforeAll, beforeEach } from 'vitest';
+
+import { compressImage } from './compressImage';
 
 // Mock: blueimp-load-image
 vi.mock('blueimp-load-image', () => ({
@@ -11,8 +12,12 @@ vi.mock('blueimp-load-image', () => ({
 }));
 
 describe('compressImage', () => {
-  const original_blob = new Blob(['original large content'], { type: 'image/jpeg' });
-  const valid_image_file = new File([original_blob], 'image.jpg', { type: 'image/jpeg' });
+  const original_blob = new Blob(['original large content'], {
+    type: 'image/jpeg',
+  });
+  const valid_image_file = new File([original_blob], 'image.jpg', {
+    type: 'image/jpeg',
+  });
 
   beforeAll(() => {
     global.URL.createObjectURL = vi.fn(() => 'blob:http://localhost:3000/mock');
@@ -56,7 +61,9 @@ describe('compressImage', () => {
   });
 
   it('이미지 파일이 아니면 에러를 던집니다', async () => {
-    const non_image_file = new File(['text content'], 'document.txt', { type: 'text/plain' });
+    const non_image_file = new File(['text content'], 'document.txt', {
+      type: 'text/plain',
+    });
     await expect(compressImage(non_image_file)).rejects.toThrow('이미지 파일이 아닙니다.');
   });
 

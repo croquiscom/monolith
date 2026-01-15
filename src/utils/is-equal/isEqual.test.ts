@@ -53,26 +53,26 @@ describe('isEqual', () => {
     const obj1 = {
       a: [1, 2, { b: 3 }],
       c: { d: [4, 5] },
-      e: { f: {g: 6}}
+      e: { f: { g: 6 } },
     };
     const obj2 = {
       a: [1, 2, { b: 3 }],
       c: { d: [4, 5] },
-      e: { f: {g: 6}}
+      e: { f: { g: 6 } },
     };
     expect(isEqual(obj1, obj2)).toBe(true);
 
     const obj3 = {
       a: [1, 2, { b: 4 }],
       c: { d: [4, 5] },
-      e: { f: {g: 6}}
+      e: { f: { g: 6 } },
     };
     expect(isEqual(obj1, obj3)).toBe(false);
 
     const obj4 = {
       a: [1, 2, { b: 3 }],
       c: { d: [4, 5] },
-      e: { f: {g: 7}}
+      e: { f: { g: 7 } },
     };
     expect(isEqual(obj1, obj4)).toBe(false);
   });

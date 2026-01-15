@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCountDownTimer } from './useCountDownTimer';
 import { vi } from 'vitest';
+
+import { useCountDownTimer } from './useCountDownTimer';
 
 describe('useCountdownTimer', () => {
   beforeEach(() => {
@@ -114,6 +115,5 @@ describe('useCountdownTimer', () => {
     });
 
     expect(result.current.is_finished).toBe(true);
-
   });
 });
