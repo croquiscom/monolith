@@ -40,7 +40,7 @@
  * ```
  */
 export class When<TResult, TSubject = void> {
-  private is_matched = false;
+  private isMatched = false;
   private result!: TResult;
 
   private constructor(private readonly subject: TSubject) {}
@@ -86,18 +86,22 @@ export class When<TResult, TSubject = void> {
    * @returns 체이닝을 위한 When 인스턴스
    */
   is(condition: TSubject extends void ? boolean : (s: TSubject) => boolean, value: TResult): this {
-    if (!this.is_matched) {
-      const matched =
+    if (this.isMatched) {
+      return this;
+    }
+
+    const matched =
         typeof condition === 'function'
           ? (condition as (s: TSubject) => boolean)(this.subject)
           : (condition as boolean);
 
       if (matched) {
-        this.is_matched = true;
+        this.isMatched = true;
         this.result = value;
       }
-    }
+      
     return this;
+    
   }
 
   /**
@@ -106,6 +110,6 @@ export class When<TResult, TSubject = void> {
    * @returns 매칭된 값 또는 기본값
    */
   else(value: TResult): TResult {
-    return this.is_matched ? this.result : value;
+    return this.isMatched ? this.result : value;
   }
 }
