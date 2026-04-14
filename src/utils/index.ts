@@ -9,3 +9,4 @@ export { isAndroid } from './is-android/isAndroid';
 export { compressImage } from './compress-image/compressImage';
 export { debounce } from './debounce/debounce';
 export { throttle } from './throttle/throttle';
+export { Stream } from './stream/stream';
