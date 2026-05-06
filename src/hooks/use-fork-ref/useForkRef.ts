@@ -6,7 +6,7 @@ import { useCallback, Ref, RefCallback } from 'react';
  * @example
  * ```tsx
  * const Component = forwardRef((props, forwardedRef) => {
- *   const elementRef = useRef<HTMLElement>();
+ *   const elementRef = useRef<HTMLElement>(null);
  *   const { ref: inViewRef } = useInView();
  *
  *   // 다수의 ref 를 단일 element 에 binding
