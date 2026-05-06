@@ -28,3 +28,6 @@ docs
 *.njsproj
 *.sln
 *.sw?
+
+# AI
+.omc
