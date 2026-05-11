@@ -12,6 +12,8 @@ export { usePreloadImage } from './hooks/use-preload-image/usePreloadImage';
 export { useDebounce } from './hooks/use-debounce/useDebounce';
 export { useDelayLoading } from './hooks/use-delay-loading/useDelayLoading';
 export { useThrottle } from './hooks/use-throttle/useThrottle';
+export { useFreshCallback } from './hooks/use-fresh-callback/useFreshCallback';
+export { useForkRef } from './hooks/use-fork-ref/useForkRef';
 
 // Utils
 export { createArray } from './utils/create-array/createArray';

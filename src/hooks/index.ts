@@ -10,3 +10,5 @@ export { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect/useIso
 export { useMount } from './use-mount/useMount';
 export { usePreloadImage } from './use-preload-image/usePreloadImage';
 export { useThrottle } from './use-throttle/useThrottle';
+export { useFreshCallback } from './use-fresh-callback/useFreshCallback';
+export { useForkRef } from './use-fork-ref/useForkRef';
