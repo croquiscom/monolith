@@ -16,6 +16,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
+      id-token: write # Required for npm OIDC (trusted publishing)
       contents: write
       pull-requests: write
     steps:
