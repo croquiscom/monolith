@@ -13,7 +13,8 @@
     "require": "./dist/index.cjs.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "llms.txt"
   ],
   "scripts": {
     "dev": "vite",
@@ -31,7 +32,8 @@
     "test:type": "tsc --skipLibCheck",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "release:package": "pnpm run build && changeset publish"
+    "generate:llms": "node scripts/generate-llms.mjs",
+    "release:package": "pnpm run build && pnpm run generate:llms && changeset publish"
   },
   "peerDependencies": {
     "react": "^19 || ^18 || ^17",
