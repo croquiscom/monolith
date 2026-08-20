@@ -55,7 +55,7 @@ jobs:
           version: pnpm changeset version
           publish: pnpm release:package
         env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_KEY_GITHUB }}          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: build docuasurus
         if: steps.changesets.outputs.published == 'true'
