@@ -1,0 +1,439 @@
+# @croquiscom/monolith v0.9.0
+
+카카오스타일 프론트엔드 공통 유틸리티 라이브러리 (React 17/18/19).
+유틸 함수, 커스텀 훅, 공통 컴포넌트를 직접 구현하기 전에 반드시 이 목록에 있는지 먼저 확인하고, 있으면 이 패키지를 사용할 것.
+이 파일은 소스 TSDoc 주석에서 자동 생성됨. 상세 문서: https://croquiscom.github.io/monolith
+
+## components
+
+### LazyEvaluation
+
+지연 평가 컴포넌트
+isEvaluate가 true 일 때 children 함수를 통해 자식 컴포넌트를 지연 평가 합니다.
+한번 평가된 자식 컴포넌트는 isEvaluate 가 false 가 되더라도 unmount 되지 않고 Component tree 상에서 유지됩니다.
+조건부 렌더링이 필요한 무거운 컴포넌트가 있을 때 최적화에 유용하게 사용 할 수 있습니다.
+
+(react 19.2 버전부터는 Activity 컴포넌트를 사용 해 주세요.)
+
+```tsx
+<>
+  <TabRoot>
+    <TabItem tabId="list">상품목록</TabItem>
+    <TabItem tabId="analytics">분석</TabItem>
+  </TabRoot>
+  <LazyEvaluation isEvaluate={activeTab === 'list'}>
+    {(isActive) => (
+      <div style={{ display: isActive ? 'block' : 'none' }}>
+        <HeavyProductList />
+      </div>
+    )}
+  </LazyEvaluation>
+  <LazyEvaluation isEvaluate={activeTab === 'analytics'}>
+    {(isActive) => (
+      <div style={{ display: isActive ? 'block' : 'none' }}>
+        <HeavyAnalyticsChart />
+      </div>
+    )}
+  </LazyEvaluation>
+</>
+```
+
+### Stack
+
+자식 컴포넌트를 스택으로 렌더링하는 컴포넌트입니다.
+
+```tsx
+// 중앙 정렬, 10px 간격
+<Stack justify='center' align='center' gap={10}>
+  {children}
+</Stack>
+
+// 양끝 정렬
+<Stack justify='space-between'>
+  {children}
+</Stack>
+
+// 상단 정렬
+<Stack align='flex-start'>
+  {children}
+</Stack>
+
+// 가로 방향 정렬
+<Stack direction='row'>
+  {children}
+</Stack>
+
+// 세로 방향 정렬
+<Stack direction='column'>
+  {children}
+</Stack>
+
+// inline flex 설정
+<Stack inline>
+  {children}
+</Stack>
+```
+
+### SwitchCase
+
+특정 값(`value`)에 따라 지정된 컴포넌트를 렌더링하는 컴포넌트입니다.
+
+```tsx
+<SwitchCase
+  value={status}
+  cases={{
+    a: <TypeA />,
+    b: <TypeB />,
+    c: <TypeC />,
+  }}
+  default={<Default />}
+/>
+```
+
+## hooks
+
+### useCountDownTimer
+
+주어진 시간 까지 11:59:59:99 형태의 카운트다운을 표현하기 위해 사용하는 hook 입니다.
+hour, minute, second, millisecond 단위 까지 지원 합니다.
+추가적으로 ms 단위까지 표현하다 보니 성능상의 이슈가 있을수 있어 작업시 rerender 이슈를 체크하면서 해주시면 좋습니다.
+
+```tsx
+  // MEMO: 1시간 카운트 다운
+  const { days, hours, minutes, seconds, milliseconds } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf() })
+  console.log(days)  // 남은 일
+  console.log(hours)  // 남은 시간
+  console.log(minutes)  // 남은 분
+  console.log(seconds)  // 남은 초
+  console.log(milliseconds)  // 남은 밀리 세컨드
+
+
+ms 를 안쓰고 second 단위 까지만 사용이 필요한 경우
+  // MEMO: 초단위 쓰로틀링 적용
+  const { days, hours, minutes, seconds, milliseconds } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf(), throttle_time: 1_000 })
+
+ 타이머 종료되는 경우
+  const { is_finished } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf(), throttle_time: 1_000 })
+
+
+ enable이 false 경우 타이머 종료여부는 false로 고정됩니다.
+  const { is_finished } = useTimer({ timestamp: dayjs().add(1, 'hours').valueOf(), throttle_time: 1_000, enable: false })
+  console.log(is_finished) // false
+```
+
+### useDebounce
+
+주어진 콜백 함수에 debounce 효과를 적용하여 리턴 합니다.
+생성된 함수는 지정된 지연 시간(wait) 동안 추가 호출이 없을 때까지 함수(func)의 실행을 지연 시킵니다.
+
+invoke_edge 로 함수의 호출 시점을 지정 할 수 있습니다.
+"trailing" 일 경우, 가장 마지막 호출 시점으로부터 지연 시간이 모두 흐른 뒤에 함수가 호출 됩니다.
+"leading" 일 경우 함수를 즉시 호출하고, 지연 시간동안 추가적인 호출을 차단합니다.
+
+리턴된 함수는 memo 처리 되어 있습니다.
+
+``` jsx
+  // invoke_edge 가 "trailing" 일 경우, 마지막 호출로 부터 300ms 후... 서버에 양식 데이터가 제출 됩니다.(기본값)
+  const handleSubmit = useDebounce({
+    func: (values: FormData) => {
+      // form data 를 서버에 제출 합니다
+    },
+    wait: 300,
+  })
+
+  //
+  return (
+    <form onSubmit={handleSubmit}>
+      ...
+    </form>
+  )
+```
+
+### useDelayLoading
+
+지연된 로딩을 위한 hook 입니다.
+로딩이 너무 빠르게 끝나는 경우 오히려 로딩 UI가 너무 깜빡이게 노출되어 
+유저에게 부정적인 ux를 줄 수 있습니다.
+따라서 최소한의 지연시간을 두고 로딩 UI를 노출합니다.
+주로 로딩이 너무 빠르게 노출되어 스켈레톤, 로딩에 대한 UX가 부정적으로 노출되는 경우 유저경험을 위해 사용하는걸 권장합니다.
+
+```ts
+const { data, isLoading } = useQuery(xx);
+ const is_delay_loading = useDelayLoading(isLoading);
+
+ if (is_delay_loading) {
+  return <Loading />;
+ }
+
+or 
+
+ *  const { data, isLoading } = useQuery(xx);
+ const is_delay_loading = useDelayLoading(isLoading, 400);
+
+ if (is_delay_loading) {
+  return <Loading />;
+ }
+```
+
+### useForkRef
+
+단일 element 에 여러 ref 를 바인딩 해야 할 경우 사용합니다.
+
+```tsx
+const Component = forwardRef((props, forwardedRef) => {
+  const elementRef = useRef<HTMLElement>(null);
+  const { ref: inViewRef } = useInView();
+
+  // 다수의 ref 를 단일 element 에 binding
+  const forkRef = useForkRef(forwardedRef, elementRef, inViewRef);
+
+  return (
+    <div ref={forkRef}>
+      ...
+    </div>
+  )
+})
+```
+
+### useFreshCallback
+
+매 렌더마다 바뀌는 callback을 감싸서, 항상 최신 버전을 호출하는 stable한 함수를 반환합니다.
+
+반환된 함수는 리렌더링이 일어나도 참조가 바뀌지 않기 때문에,
+useEffect의 deps 배열이나 자식 컴포넌트의 props로 안전하게 전달할 수 있습니다.
+내부적으로는 항상 최신 callback을 바라보므로 stale closure 문제가 발생하지 않습니다.
+
+### useIsMounted
+
+컴포넌트가 mount 되었는지 여부를 반환합니다.
+
+```typescript
+const CompoA = () => {
+  const is_mounted = useIsMounted();
+  return <div>{is_mounted ? '마운트됨' : '마운트안됨'}</div>;
+};
+```
+
+### useIsomorphicLayoutEffect
+
+클라이언트에서는 useLayoutEffect 를 사용하고 서버사이드에서는 useEffect를 사용합니다.
+useLayoutEffect 를 SSR지원해야 하는 영역에서 주로 사용합니다.
+
+```typescript
+const Component = () => {
+
+
+  useIsomorphicLayoutEffect(() => {
+     do something
+  },[]);
+
+  return (
+   <div>
+    {...}
+   </div>
+  );
+}
+```
+
+### useMount
+
+mount 시점만 effect 할시 사용
+mount 시점에만 사용해야하는 특이케이스가 존재해서 effect만으로 구성할경우 lint를 보고 deps를 넣어 의도치 않은 이슈가 있을수 있음
+해당 훅으로 사용하여 명확하게 mount 시점 사용을 알림
+
+```typescript
+const CompoA = () => {
+  useMount(() => {
+  console.log("mount");
+  });
+
+  return <div>CompoA</div>;
+};
+```
+
+### usePreloadImage
+
+성능상의 이슈로 preload 가 필요한 이미지들의 경우
+해당 hook을 사용하여 인자로 주어진 이미지 리스트를 preload 합니다.
+
+```ts
+const is_completed_load_image = usePreloadImage(['https://example.com/image1.jpg', 'https://example.com/image2.jpg']);
+is_completed_load_image - true(전부 이미지 로드가 완료된 경우 true 아니면 false)
+```
+
+### useThrottle
+
+주어진 콜백 함수를 지정된 시간 간격으로 제한하여 호출할 수 있도록 하는 훅입니다.
+주로 성능 최적화 및 불필요한 함수 호출을 방지하기 위해 사용됩니다.
+
+```tsx
+const throttle = useThrottle({
+ func: (x: number, y: number) => {
+   console.log(`마우스 위치: x=${x}, y=${y} (쓰로틀됨)`);
+ },
+ wait: 1000,
+ options: { leading: true, trailing: true }, // 시작과 끝 시점에서 함수를 호출합니다.
+ // options를 생략하면 기본값은 { leading: true, trailing: true }입니다.
+ // options: { leading: false, trailing: true }로 설정하면 끝 시점에서만 함수를 호출합니다.
+ // options: { leading: true, trailing: false }로 설정하면 시작 시점에서만 함수를 호출합니다.
+ // options: { leading: false, trailing: false }로 설정하면 함수를 호출하지 않습니다.
+});
+
+const handleMouseMove = (e) => {
+ throttle(e.clientX, e.clientY); // 쓰로틀링된 함수 호출
+};
+
+return <div onMouseMove={handleMouseMove}>Move your mouse</div>;
+```
+
+## utils
+
+### compressImage
+
+주어진 이미지 파일을 압축하여 새로운 파일 객체를 반환합니다.
+이 함수는 주로 이미지 업로드 전에 파일 크기를 줄이기 위해 사용됩니다.
+내부적으로 `blueimp-load-image` 라이브러리를 사용하여 이미지를 로드하고,
+HTMLCanvasElement를 활용해 이미지를 압축합니다.
+
+```tsx
+import { compressImage } from "./compressImage";
+
+async function handleImageUpload(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    console.log("Original File:", file);
+
+    // 이미지 압축
+    const compressed_file = await compressImage(file, 500);
+    console.log("Compressed File:", compressed_file);
+
+    // 압축된 파일을 업로드
+    const form_data = new FormData();
+    form_data.append("image", compressed_file);
+    await fetch("/presigned-url", {
+      method: "PUT",
+      body: form_data,
+    });
+  }
+}
+```
+
+### createArray
+
+주어진 길이의 배열을 생성 합니다
+dummy 리스트를 만들거나 index가 필요한 배열 생성 필요시 사용합니다.
+
+```typescript
+const array = createArray(5);
+console.log(array); // [0, 1, 2, 3, 4];
+```
+
+### debounce
+
+debounce 효과가 적용된 function 을 생성합니다.
+생성된 function 은 지정된 지연 시간(wait) 동안 추가 호출이 없을 때까지
+파리미터로 전달 받은 함수(func)의 실행을 지연 시킵니다.
+
+invoke_edge 로 함수의 호출 시점을 지정 할 수 있습니다.
+"trailing" 일 경우, 가장 마지막 호출 시점으로부터 지연 시간이 모두 흐른 뒤에 함수가 호출 됩니다.
+"leading" 일 경우 함수를 즉시 호출하고, 지연 시간동안 추가적인 호출을 차단합니다.
+
+``` typescript
+  // invoke_edge 가 "trailing" 일 경우...(기본값)
+  const debounced_func_trailing = debounce({
+    func: () => {
+      console.log("invoked")
+    },
+    wait: 300,
+  })
+
+  // 마지막 호출로 부터 300ms 후... "invoked" 1 회 출력
+  debounced_func_trailing()
+  debounced_func_trailing()
+```
+
+### delay
+
+정해진 시간 동안 기다립니다
+
+```ts
+<pre>
+  const delayForOneSecond = async () => {
+    await wait(1000);
+    console.log('1초 후 출력됩니다.');
+  }
+</pre>
+```
+
+### isAndroid
+
+userAgent를 기반으로 Aos인지 아닌지를 판별합니다.
+
+```tsx
+const is_android = isAndroid();
+  or
+const agent = navigator.userAgent // 특정한 agent가 필요한 경우;
+const is_android = isAndroid(agent);
+```
+
+### isEqual
+
+isEqual 함수는 두 값이 같은지 여부를 반환합니다.
+두 값이 같으면 true, 다르면 false를 반환합니다.
+두 값의 타입이 다른 경우 false를 반환합니다.
+두 값이 모두 배열인 경우, 두 배열의 모든 요소가 같은지 여부를 반환합니다.
+두 값이 모두 객체인 경우, 두 객체의 모든 키와 값이 같은지 여부를 반환합니다.
+두 값이 모두 함수인 경우, 두 함수가 같은지 여부를 반환합니다.
+두 값이 모두 문자열인 경우, 두 문자열이 같은지 여부를 반환합니다.
+
+### isIos
+
+userAgent를 기반으로 iOS인지 아닌지를 판별합니다.
+
+```tsx
+const is_ios = isIos();
+  or
+const agent = navigator.userAgent // 특정한 agent가 필요한 경우;
+const is_ios = isIos(agent);
+```
+
+### throttle
+
+throttle 효과가 적용된 function 을 생성합니다.
+
+options 로 함수의 호출 시점을 지정 할 수 있습니다.
+"leading" 일 경우 함수를 즉시 호출하고, 지연 시간동안 추가적인 호출을 차단합니다.
+"trailing" 일 경우 지연 시간이 모두 흐른 뒤에 함수가 호출 됩니다.
+
+```tsx
+const throttled_func = throttle({
+ func: (x: number, y: number) => {
+   console.log(`throttled: x=${x}, y=${y}`);
+ },
+ wait: 1000,
+ options: { leading: true, trailing: true },
+});
+
+throttled_func(1, 2);
+throttled_func(3, 4);
+throttled_func(5, 6);
+```
+
+### When
+
+Kotlin의 `when` 표현식과 유사한 방식으로 조건에 따른 값을 결정합니다.
+if-else 체인과 달리 표현식(expression)으로 동작하여 `const` 할당이 가능하며,
+`.else()` 를 통해 기본값 처리가 강제됩니다.
+
+- `When.create()` — 조건마다 참조 대상이 다를 때 boolean 조건으로 사용합니다.
+- `When.of(subject)` — 하나의 변수를 기준으로 분기할 때 사용합니다.
+
+```typescript
+enum ShowroomStatus { SCHEDULED, ENDED, ACTIVE }
+
+const status = When.create<ShowroomStatus>()
+  .is(now < dateStart, ShowroomStatus.SCHEDULED)
+  .is(now > dateEnd,   ShowroomStatus.ENDED)
+  .else(ShowroomStatus.ACTIVE);
+```
