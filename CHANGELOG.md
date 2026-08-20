@@ -1,5 +1,12 @@
 # monolith
 
+## 0.9.0
+
+### Minor Changes
+
+- a3378c2: when 함수 추가
+- c6aefbd: useForkRef, useFreshCallback 유틸리티 hook 추가
+
 ## 0.8.1
 
 ### Patch Changes
