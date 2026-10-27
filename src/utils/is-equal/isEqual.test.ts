@@ -38,11 +38,9 @@ describe('isEqual', () => {
 
   test('함수 비교', () => {
     const func1 = () => {
-      console.log('hello');
       return 1;
     };
     const func2 = () => {
-      console.log('hello');
       return 2;
     };
     expect(isEqual(func1, func1)).toBe(true);
